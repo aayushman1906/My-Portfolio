@@ -1,0 +1,124 @@
+/* Importing Google Fonts for better typography */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@300;400;600&display=swap');
+
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and overall layout */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f7f7f7;
+  color: #333;
+  line-height: 1.7;
+  padding: 20px;
+}
+
+/* Header styling */
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 40px 0;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 3em;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* Main content styling */
+main {
+  margin-top: 30px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.blog-post {
+  background-color: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+.blog-post h1 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.intro {
+  font-size: 1.2em;
+  font-weight: 300;
+  color: #555;
+  margin-bottom: 25px;
+}
+
+.section h2 {
+  font-size: 2em;
+  color: #4CAF50;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+ul {
+  list-style-type: square;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+ul li {
+  margin-bottom: 10px;
+  font-size: 1.1em;
+  color: #555;
+}
+
+ul li strong {
+  color: #4CAF50;
+}
+
+/* Footer Styling */
+footer {
+  text-align: center;
+  margin-top: 50px;
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px;
+  font-size: 1em;
+  font-weight: 400;
+  border-radius: 8px;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Media Queries for better responsiveness */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.2em;
+  }
+
+  .blog-post {
+    padding: 30px;
+  }
+
+  .section h2 {
+    font-size: 1.7em;
+  }
+
+  ul li {
+    font-size: 1em;
+  }
+}

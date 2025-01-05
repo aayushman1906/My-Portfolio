@@ -1,0 +1,311 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
+
+header nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Home Section */
+#home {
+    background-color: #00aaff;
+    color: #fff;
+    text-align: center;
+    padding: 50px 0;
+}
+
+/* About Section */
+#about {
+    background-color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+/* Blog Section */
+#blog {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+}
+
+.blog-post {
+    background-color: #fff;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.blog-post h3 {
+    color: #00aaff;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+}
+
+form input, form textarea {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px;
+    border: none;
+    background-color: #00aaff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* General styles for images */
+.main-img, .about-img {
+    width: 300px;       /* Make the image responsive */
+    max-width: 300px;  /* Limit the width to 200px to make them smaller */
+    height: auto;      /* Maintain the aspect ratio */
+    margin: 10px auto; /* Add spacing and center the images */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific adjustments for each section */
+
+/* Home Section Image */
+.main-img {
+    max-width: 50%;   /* Slightly smaller image for the home section */
+    margin: 20px auto; /* Center the image */
+}
+
+/* About Section Image */
+.about-img {
+    max-width: 60%;  /* Adjust image size for about section */
+    margin: 20px auto;
+}
+/* Profile image styling */
+.profile-img {
+    width: 100%;        /* Make the image responsive */
+    max-width: 150px;   /* Set a maximum width of 150px */
+    height: auto;       /* Maintain aspect ratio */
+    border-radius: 50%; /* Make the image round again */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;  /* Center the image */
+}
+
+/* Style for YouTube Link */
+footer a {
+    text-decoration: none;    /* Remove underline */
+    font-size: 20px;          /* Increase font size */
+    font-weight: bold;        /* Make the text bold */
+    color: #fff;              /* White text color */
+    padding: 12px 25px;       /* Add padding around the link */
+    background-color: #ff0000;/* YouTube Red */
+    border-radius: 25px;      /* Round corners for the button */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Strong shadow for depth */
+    text-align: center;       /* Center text */
+    display: inline-block;    /* Make it inline */
+    transition: all 0.3s ease;/* Smooth transition for hover effect */
+}
+
+/* Hover Effect for YouTube Link */
+footer a:hover {
+    background-color: #c4302b; /* Darker red on hover */
+    transform: scale(1.05);     /* Slightly enlarge the button */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
+    color: #fff;               /* Ensure text stays white */
+}
+
+/* Add an icon before the text (optional) */
+footer a::before {
+    content: url('https://upload.wikimedia.org/wikipedia/commons/a/a9/YouTube_icon_%282013-2017%29.png');
+    width: 25px;
+    margin-right: 10px;
+    vertical-align: middle;    /* Align the icon with the text */
+}
+/* Style for YouTube Link */
+footer a {
+    text-decoration: none;    /* Remove underline */
+    font-size: 20px;          /* Increase font size */
+    font-weight: bold;        /* Make the text bold */
+    color: #fff;              /* White text color */
+    padding: 12px 25px;       /* Add padding around the link */
+    background-color: #ff0000;/* YouTube Red */
+    border-radius: 25px;      /* Round corners for the button */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Strong shadow for depth */
+    text-align: center;       /* Center text */
+    display: inline-block;    /* Make it inline */
+    transition: all 0.3s ease;/* Smooth transition for hover effect */
+}
+
+/* Hover Effect for YouTube Link */
+footer a:hover {
+    background-color: #c4302b; /* Darker red on hover */
+    transform: scale(1.05);     /* Slightly enlarge the button */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
+    color: #fff;               /* Ensure text stays white */
+}
+
+/* Add an icon before the text (optional) */
+footer a::before {
+    content: url('https://upload.wikimedia.org/wikipedia/commons/a/a9/YouTube_icon_%282013-2017%29.png');
+    width: 25px;
+    margin-right: 10px;
+    vertical-align: middle;    /* Align the icon with the text */
+}
+
+
+
+/* Contact Section */
+#contact {
+    background-color: #fff;
+    padding: 50px 0;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+}
+
+form label {
+    margin: 10px 0;
+    font-weight: bold;
+    text-align: left;
+}
+
+form input, form textarea {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px;
+    border: none;
+    background-color: #00aaff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0077cc;
+}
+
+/* Style for YouTube Link */
+.youtube-link a {
+    text-decoration: none;    /* Remove underline */
+    font-size: 20px;          /* Increase font size */
+    font-weight: bold;        /* Make the text bold */
+    color: #fff !important;   /* White text color */
+    padding: 12px 25px;       /* Add padding around the link */
+    background-color: #ff0000;/* YouTube Red */
+    border-radius: 25px;      /* Round corners for the button */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Strong shadow for depth */
+    text-align: center;       /* Center text */
+    display: inline-block;    /* Make it inline */
+    transition: all 0.3s ease;/* Smooth transition for hover effect */
+}
+
+/* Hover Effect for YouTube Link */
+.youtube-link a:hover {
+    background-color: #c4302b; /* Darker red on hover */
+    transform: scale(1.05);     /* Slightly enlarge the button */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Increase shadow on hover */
+    color: #fff;               /* Ensure text stays white */
+}
+
+/* Add an icon before the text (optional) */
+.youtube-link a::before {
+    content: url('https://upload.wikimedia.org/wikipedia/commons/a/a9/YouTube_icon_%282013-2017%29.png');
+    width: 25px;
+    margin-right: 10px;
+    vertical-align: middle;    /* Align the icon with the text */
+}
+
+/* Keyframe animation for slight fade-in */
+@keyframes fadeInSlightly {
+    from {
+        opacity: 0;
+        transform: translateY(50px); /* Small movement */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Settle into place */
+    }
+}
+
+/* Class for hidden state */
+.hidden {
+    opacity: 0;
+    transform: translateY(10px); /* Initial slight offset */
+    transition: opacity 1s ease, transform 0.5s ease; /* Smooth transition */
+}
+
+/* Class for visible state */
+.visible {
+    animation: fadeInSlightly 1s ease-out forwards; /* Slight fade-in */
+}
+
+.experience{
+    font-family: 'FontName', fallback-font, generic-family;
+    font-size: 17px;
+}
