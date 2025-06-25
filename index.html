@@ -607,7 +607,7 @@
                         <p>Phone: +977-9766097728</p>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm" action="https://formsubmit.co/aayushmanthakulla@gmail.com" method="POST">
+                <form class="contact-form" id="contactForm" action="https://formsubmit.co/thakullaaayushman@gmail.com" method="POST">
                     <div class="form-group">
                         <input type="text" id="name" name="name" placeholder="Your Name" required aria-label="Your Name">
                     </div>
@@ -617,10 +617,8 @@
                     <div class="form-group">
                         <textarea id="message" name="message" placeholder="Your Message" required aria-label="Your Message" rows="5"></textarea>
                     </div>
-                    <input type="hidden" name="_captcha" value="false">
                     <button type="submit" class="btn primary smart-hover glow" aria-label="Send Message">
                         <span class="btn-text">Send Message</span>
-                        <span class="btn-loading" style="display: none;">Sending...</span>
                     </button>
                 </form>
             </div>
@@ -751,42 +749,6 @@
             
             // Start typing animation after page load
             setTimeout(typeWriter, 1000);
-        }
-
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Prevent default form submission
-
-                const submitBtn = this.querySelector('button[type="submit"]');
-                const btnText = submitBtn.querySelector('.btn-text');
-                const btnLoading = submitBtn.querySelector('.btn-loading');
-                btnText.style.display = 'none';
-                btnLoading.style.display = 'inline';
-                submitBtn.disabled = true;
-
-                // Prepare form data
-                const formData = new FormData(this);
-
-                // Send via fetch to FormSubmit
-                fetch('https://formsubmit.co/thakullaaayushman@gmail.com', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    // Show thank you message or redirect
-                    this.innerHTML = '<p style="color: var(--primary-color); font-size: 1.2rem;">Thank you! Your message has been sent.</p>';
-                })
-                .catch(error => {
-                    btnText.style.display = 'inline';
-                    btnLoading.style.display = 'none';
-                    submitBtn.disabled = false;
-                    alert('There was an error sending your message. Please try again.');
-                });
-            });
         }
     </script>
 </body>
