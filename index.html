@@ -2,7 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#008CBA">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="format-detection" content="telephone=no">
     <title>Aayushman Thakulla - Portfolio</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
@@ -344,6 +348,68 @@
             0%, 100% { opacity: 0; transform: scale(0); }
             50% { opacity: 1; transform: scale(1); }
         }
+        
+        /* Enhanced Mobile Menu Styles */
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: all 0.3s ease;
+            z-index: 1002;
+        }
+        
+        .menu-btn:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .menu-btn:focus {
+            outline: none;
+            color: var(--primary-color);
+        }
+        
+        /* Touch-friendly button sizes for mobile */
+        @media (max-width: 767px) {
+            .menu-btn {
+                display: block;
+                min-width: 44px;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .btn {
+                min-height: 44px;
+                min-width: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .social-links a {
+                min-width: 44px;
+                min-height: 44px;
+            }
+        }
+        
+        /* Prevent text selection on mobile */
+        @media (max-width: 767px) {
+            .nav-links a,
+            .btn,
+            .menu-btn {
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -369,9 +435,9 @@
                 <li><a href="blog.html" target="_blank" class="nav-link">Blog</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-            <div class="menu-btn">
+            <button class="menu-btn" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars"></i>
-            </div>
+            </button>
         </div>
     </nav>
 
@@ -512,20 +578,20 @@
                         <p>Phone: +977-9766097728</p>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" novalidate>
                     <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                        
+                        <input type="text" id="name" name="name" placeholder="Your Name" required aria-label="Your Name">
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                        
+                        <input type="email" id="email" name="email" placeholder="Your Email" required aria-label="Your Email">
                     </div>
                     <div class="form-group">
-                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
-                        
+                        <textarea id="message" name="message" placeholder="Your Message" required aria-label="Your Message" rows="5"></textarea>
                     </div>
-                    <button type="submit" class="btn primary smart-hover glow">Send Message</button>
+                    <button type="submit" class="btn primary smart-hover glow" aria-label="Send Message">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loading" style="display: none;">Sending...</span>
+                    </button>
                 </form>
             </div>
         </div>
