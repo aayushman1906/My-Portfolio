@@ -7,6 +7,70 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @media (max-width: 1023px) {
+            .container {
+                padding: 0 0.5rem;
+            }
+            .about-content {
+                flex-direction: column !important;
+                gap: 1.5rem;
+                align-items: center;
+            }
+            .about-image {
+                margin: 0 auto 1rem auto;
+                display: flex;
+                justify-content: center;
+            }
+            .about-image img, .profile-image {
+                width: 120px !important;
+                height: 120px !important;
+            }
+            .about-text {
+                text-align: center;
+                font-size: 1rem;
+            }
+            .personal-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            .youtube h2 {
+                font-size: 1.5rem !important;
+            }
+            .youtube img {
+                width: 80px !important;
+                height: 80px !important;
+            }
+            .youtube div {
+                padding: 1rem 1rem !important;
+                font-size: 1rem !important;
+            }
+            .btn.primary {
+                font-size: 1rem !important;
+                padding: 0.7rem 1.5rem !important;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.2rem;
+            }
+            .about-image img, .profile-image {
+                width: 80px !important;
+                height: 80px !important;
+            }
+            .youtube h2 {
+                font-size: 1.1rem !important;
+            }
+            .youtube div {
+                padding: 0.5rem 0.5rem !important;
+                font-size: 0.95rem !important;
+            }
+            .btn.primary {
+                font-size: 0.95rem !important;
+                padding: 0.5rem 1rem !important;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar">
@@ -15,6 +79,9 @@
                 <img src="img2.png" alt="Logo" class="logo-img" style="height: 40px; width: auto;" />
                 <span class="logo-text">AT</span>
             </a>
+            <button class="menu-btn" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="details.html">About</a></li>
@@ -23,9 +90,6 @@
                 <li><a href="blog.html" target="_blank">Blog</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
-            <div class="menu-btn">
-                <i class="fas fa-bars"></i>
-            </div>
         </div>
     </nav>
 

@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <meta name="theme-color" content="#008CBA">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,6 +18,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        html, body {
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
         /* Smart Scroll Progress Indicator */
         .scroll-progress {
             position: fixed;
@@ -410,6 +415,30 @@
                 user-select: none;
             }
         }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 40vh;
+                background: rgba(10,22,38,0.98);
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+                padding-top: 2.5rem;
+            }
+            .nav-links.active {
+                display: flex !important;
+            }
+            .menu-btn {
+                display: block;
+                z-index: 10000;
+            }
+        }
     </style>
 </head>
 <body>
@@ -420,29 +449,29 @@
     
     <!-- Smart Scroll Progress Indicator -->
     <div class="scroll-progress" id="scrollProgress"></div>
-    
+
     <nav class="navbar">
         <div class="nav-content">
-            <a href="#home" class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
-                <img src="img2.png" alt="Logo" class="logo-img" style="height: 40px; width: auto;" />
+            <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="img2.png" alt="Logo" class="logo-img" style="height: 40px; width: auto;">
                 <span class="logo-text">AT</span>
             </a>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link active">Home</a></li>
-                <li><a href="details.html" target="_blank" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="blog.html" target="_blank" class="nav-link">Blog</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
             <button class="menu-btn" aria-label="Toggle navigation menu">
                 <i class="fas fa-bars"></i>
             </button>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </div>
     </nav>
 
     <section id="home" class="hero animated-bg">
-        <div class="hero-content">
+        <div class="hero-content fade-in-section">
             <h1>Hi, I'm <span class="highlight animated-gradient-text floating">Aayushman Thakulla</span></h1>
             <p class="subtitle sparkle">Aspiring Developer</p>
             <div class="cta-buttons">
@@ -578,7 +607,7 @@
                         <p>Phone: +977-9766097728</p>
                     </div>
                 </div>
-                <form action="https://formspree.io/f/xaybcdop" method="POST" class="contact-form" id="contactForm" novalidate>
+                <form class="contact-form" id="contactForm" novalidate>
                     <div class="form-group">
                         <input type="text" id="name" name="name" placeholder="Your Name" required aria-label="Your Name">
                     </div>
@@ -588,6 +617,7 @@
                     <div class="form-group">
                         <textarea id="message" name="message" placeholder="Your Message" required aria-label="Your Message" rows="5"></textarea>
                     </div>
+                    <input type="hidden" name="_captcha" value="false">
                     <button type="submit" class="btn primary smart-hover glow" aria-label="Send Message">
                         <span class="btn-text">Send Message</span>
                         <span class="btn-loading" style="display: none;">Sending...</span>
@@ -721,6 +751,42 @@
             
             // Start typing animation after page load
             setTimeout(typeWriter, 1000);
+        }
+
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent default form submission
+
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const btnText = submitBtn.querySelector('.btn-text');
+                const btnLoading = submitBtn.querySelector('.btn-loading');
+                btnText.style.display = 'none';
+                btnLoading.style.display = 'inline';
+                submitBtn.disabled = true;
+
+                // Prepare form data
+                const formData = new FormData(this);
+
+                // Send via fetch to FormSubmit
+                fetch('https://formsubmit.co/aayushmanthakulla@gmail.com', {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    // Show thank you message or redirect
+                    this.innerHTML = '<p style="color: var(--primary-color); font-size: 1.2rem;">Thank you! Your message has been sent.</p>';
+                })
+                .catch(error => {
+                    btnText.style.display = 'inline';
+                    btnLoading.style.display = 'none';
+                    submitBtn.disabled = false;
+                    alert('There was an error sending your message. Please try again.');
+                });
+            });
         }
     </script>
 </body>
