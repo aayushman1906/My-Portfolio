@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Aayushman Thakulla</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .blog-header {
+            background: linear-gradient(120deg, var(--primary-color) 0%, #0088cc 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+            margin-top: 80px; /* Add space for fixed navbar */
+        }
+        
+        .blog-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .blog-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .blog-list-section { 
+            margin-bottom: 3rem; 
+            background: white;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .blog-list-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        
+        .blog-list-section h2 { 
+            color: var(--primary-color); 
+            margin-bottom: 1.5rem; 
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+        
+        .blog-list-section h2 .emoji {
+            background: none;
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+            text-shadow: none;
+            margin-right: 0.5rem;
+            font-size: 2.4rem;
+        }
+        
+        .blog-list-section h2 .text {
+            background: linear-gradient(135deg, #0088cc 0%, #00b4db 50%, #0088cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .blog-list-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #0088cc, #00b4db, #0088cc);
+            border-radius: 2px;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .blog-list { 
+            list-style: none; 
+            padding: 0; 
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .blog-list li { 
+            margin-bottom: 0.5rem; 
+        }
+        
+        .blog-list a { 
+            color: #2c3e50; 
+            font-size: 1.15rem; 
+            font-weight: 500;
+            text-decoration: none; 
+            transition: all 0.4s ease;
+            display: block;
+            padding: 1rem 1.2rem;
+            border-radius: 12px;
+            border-left: 5px solid var(--primary-color);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-list a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 140, 186, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .blog-list a:hover { 
+            color: #1a252f; 
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-left-color: #0088cc;
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 140, 186, 0.25);
+            font-weight: 600;
+        }
+        
+        .blog-list a:hover::before {
+            left: 100%;
+        }
+        
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .category-stats span {
+            background: linear-gradient(135deg, #0088cc, #00b4db);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 8px rgba(0, 140, 186, 0.3);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .back-to-home {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .back-to-home a {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .back-to-home a:hover {
+            background: #0088cc;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 140, 186, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .blog-header h1 {
+                font-size: 2rem;
+            }
+            
+            .blog-container {
+                padding: 0 1rem;
+            }
+            
+            .blog-list-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="images/img2.png" alt="Logo" class="logo-img" style="height: 40px; width: auto;" />
+                <span class="logo-text">AT</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="details.html" target="_blank">About</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="blog-header">
+        <h1>📚 My Blog</h1>
+        <p>Exploring programming, AI, technology, and student life through my journey as a young developer from Nepal</p>
+    </div>
+
+    <div class="blog-container">
+        <div class="blog-list-section">
+            <div class="category-stats">
+                <h2><span class="emoji">🔥</span><span class="text">Programming & Development</span></h2>
+                <span>10 Articles</span>
+            </div>
+            <ul class="blog-list">
+                <li><a href="how-i-started-coding.html" target="_blank">How I Started My Coding Journey at 16</a></li>
+                <li><a href="top-5-programming-languages-2025.html" target="_blank">Top 5 Programming Languages to Learn in 2025</a></li>
+                <li><a href="why-learn-python.html" target="_blank">Why Every Beginner Should Learn Python First</a></li>
+                <li><a href="frontend-vs-backend.html" target="_blank">Difference Between Frontend and Backend Development</a></li>
+                <li><a href="mini-python-projects.html" target="_blank">10 Mini Projects to Practice Python (For Students)</a></li>
+                <li><a href="html-vs-css-vs-js.html" target="_blank">HTML vs. CSS vs. JavaScript – Explained Simply</a></li>
+                <li><a href="basics-web-dev-class-11.html" target="_blank">The Basics of Web Development for Class 11 Students</a></li>
+                <li><a href="why-learn-c-cpp.html" target="_blank">Why Learning C and C++ Is Still Important</a></li>
+                <li><a href="favorite-free-resources.html" target="_blank">My Favorite Free Resources to Learn Programming</a></li>
+                <li><a href="python-beginner-mistakes.html" target="_blank">Common Mistakes Beginners Make in Python</a></li>
+            </ul>
+        </div>
+        
+        <div class="blog-list-section">
+            <div class="category-stats">
+                <h2><span class="emoji">🤖</span><span class="text">AI & Technology</span></h2>
+                <span>8 Articles</span>
+            </div>
+            <ul class="blog-list">
+                <li><a href="ai-changing-life.html" target="_blank">How Artificial Intelligence is Changing Our Daily Life</a></li>
+                <li><a href="top-5-ai-tools.html" target="_blank">Top 5 AI Tools That Made My Work Easier</a></li>
+                <li><a href="ai-beginners-guide-2025.html" target="_blank">Beginner's Guide to Artificial Intelligence in 2025</a></li>
+                <li><a href="ai-for-students.html" target="_blank">How Students Can Use AI for Study and Learning</a></li>
+                <li><a href="can-ai-replace-programmers.html" target="_blank">Can AI Replace Programmers? My Thoughts</a></li>
+                <li><a href="future-of-ai-nepal.html" target="_blank">The Future of AI in Nepal</a></li>
+                <li><a href="robotics-and-ai.html" target="_blank">Robotics and AI: How They Work Together</a></li>
+                <li><a href="canva-ai-design.html" target="_blank">Using Canva and AI for Creative Design</a></li>
+            </ul>
+        </div>
+        
+        <div class="blog-list-section">
+            <div class="category-stats">
+                <h2><span class="emoji">📱</span><span class="text">Mobile & Tech Reviews</span></h2>
+                <span>5 Articles</span>
+            </div>
+            <ul class="blog-list">
+                <li><a href="best-phones-students.html" target="_blank">Best Phones for Students Under NPR 25,000</a></li>
+                <li><a href="best-laptop-programming.html" target="_blank">How to Choose the Best Laptop for Programming</a></li>
+                <li><a href="top-5-apps-tech-students.html" target="_blank">Top 5 Apps Every Tech Student Should Use</a></li>
+                <li><a href="budget-laptop-checklist.html" target="_blank">What to Look for in a Budget Laptop (My Checklist)</a></li>
+                <li><a href="virtualbox-kali-linux.html" target="_blank">Using VirtualBox and Kali Linux for Ethical Hacking</a></li>
+            </ul>
+        </div>
+        
+        <div class="blog-list-section">
+            <div class="category-stats">
+                <h2><span class="emoji">📚</span><span class="text">Student Life & Self-Improvement</span></h2>
+                <span>5 Articles</span>
+            </div>
+            <ul class="blog-list">
+                <li><a href="my-daily-schedule.html" target="_blank">My Daily Schedule as a Class 11 Student & Programmer</a></li>
+                <li><a href="balance-study-coding.html" target="_blank">Tips to Balance Study and Coding</a></li>
+                <li><a href="spiritual-knowledge.html" target="_blank">Why Spiritual Knowledge Is Important in Today's World</a></li>
+                <li><a href="manage-time-school-youtube-coding.html" target="_blank">How I Manage My Time Between School, YouTube, and Coding</a></li>
+                <li><a href="best-books-tech-students.html" target="_blank">Best Books for Students Who Want to Learn Tech</a></li>
+            </ul>
+        </div>
+        
+        <div class="blog-list-section">
+            <div class="category-stats">
+                <h2><span class="emoji">🌐</span><span class="text">Nepal-Specific Content</span></h2>
+                <span>5 Articles</span>
+            </div>
+            <ul class="blog-list">
+                <li><a href="scope-programming-ai-nepal.html" target="_blank">Scope of Programming and AI in Nepal</a></li>
+                <li><a href="start-tech-career-nepal.html" target="_blank">How to Start a Tech Career in Nepal as a Teenager</a></li>
+                <li><a href="online-platforms-nepali-students.html" target="_blank">Top Online Platforms for Nepali Students to Learn Coding</a></li>
+                <li><a href="my-youtube-journey.html" target="_blank">My YouTube Journey – Teaching Nepali Students About Tech</a></li>
+                <li><a href="building-tech-blog-nepal.html" target="_blank">How I'm Building a Tech Blog from Nepal</a></li>
+            </ul>
+        </div>
+        
+        <div class="back-to-home">
+            <a href="index.html" target="_blank">
+                <i class="fas fa-home"></i> Back to Portfolio
+            </a>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 

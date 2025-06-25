@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aayushman Thakulla - Portfolio</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Smart Scroll Progress Indicator */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            z-index: 1001;
+            transition: width 0.1s ease;
+        }
+        
+        /* Smart Navigation Highlighting */
+        .nav-links a.active {
+            color: var(--primary-color) !important;
+        }
+        
+        .nav-links a.active::after {
+            width: 100% !important;
+        }
+        
+        /* Animated Gradient Text */
+        .animated-gradient-text {
+            background: linear-gradient(-45deg, #008CBA, #00b4db, #0077A3, #008CBA);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Floating Animation */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Pulse Animation */
+        .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* Glow Effect */
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color), 0 0 15px var(--primary-color); }
+            to { box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color); }
+        }
+        
+        /* Typing Animation */
+        .typing-text {
+            border-right: 3px solid var(--primary-color);
+            white-space: nowrap;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: var(--primary-color); }
+            51%, 100% { border-color: transparent; }
+        }
+        
+        /* Rainbow Text Animation */
+        .rainbow-text {
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 700% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: rainbow 4s linear infinite;
+        }
+        
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        /* Bounce Animation */
+        .bounce {
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        /* Rotate Animation */
+        .rotate {
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Shake Animation */
+        .shake {
+            animation: shake 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        /* Smart Skill Cards */
+        .skill-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 140, 186, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .skill-card:hover::after {
+            left: 100%;
+        }
+        
+        /* Smart Project Cards */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 140, 186, 0.9), rgba(0, 119, 163, 0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-overlay-content {
+            text-align: center;
+            color: white;
+        }
+        
+        /* Smart Contact Form */
+        .contact-form {
+            position: relative;
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        .form-group input:focus + label,
+        .form-group textarea:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            transform: translateY(-25px) scale(0.8);
+            color: var(--primary-color);
+        }
+        
+        .form-group label {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            color: var(--light-text);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+        
+        /* Smart Loading Animation */
+        .loading-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            display: none; /* Temporarily hidden by default */
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-animation.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid var(--card-bg);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Smart Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Smart Section Transitions */
+        .fade-in-section {
+            opacity: 1; /* Changed from 0 to 1 - always visible by default */
+            transform: translateY(0); /* Changed from translateY(50px) to translateY(0) */
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Smart Hover Effects */
+        .smart-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .smart-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 140, 186, 0.3);
+        }
+        
+        /* Animated Background */
+        .animated-bg {
+            background: linear-gradient(-45deg, #0A1626, #0D1A2F, #1A273B, #0A1626);
+            background-size: 400% 400%;
+            animation: bgShift 8s ease infinite;
+        }
+        
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Sparkle Effect */
+        .sparkle {
+            position: relative;
+        }
+        
+        .sparkle::before,
+        .sparkle::after {
+            content: '✨';
+            position: absolute;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        
+        .sparkle::before {
+            left: -20px;
+            top: 0;
+            animation-delay: 0s;
+        }
+        
+        .sparkle::after {
+            right: -20px;
+            bottom: 0;
+            animation-delay: 1s;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Smart Loading Animation -->
+    <div class="loading-animation" id="loadingAnimation">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Smart Scroll Progress Indicator -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#home" class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="images/img2.png" alt="Logo" class="logo-img" style="height: 40px; width: auto;" />
+                <span class="logo-text">AT</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="details.html" target="_blank" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="blog.html" target="_blank" class="nav-link">Blog</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero animated-bg">
+        <div class="hero-content">
+            <h1>Hi, I'm <span class="highlight animated-gradient-text floating">Aayushman Thakulla</span></h1>
+            <p class="subtitle sparkle">Aspiring Developer</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn primary smart-hover glow">Contact Me</a>
+                <a href="#projects" class="btn secondary smart-hover pulse">View Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about fade-in-section">
+        <div class="container">
+            <h2 class="animated-gradient-text">About Me</h2>
+            <div class="about-content">
+                <div class="about-image smart-hover floating">
+                    <img src="images/profile.jpg" alt="Aayushman Thakulla" class="profile-image">
+                </div>
+                <div class="about-text">
+                    <p>I am a 17-year-old aspiring developer passionate about creating innovative solutions through technology. I love learning new technologies and building projects that make a difference.</p>
+                    <div class="personal-info">
+                        <div class="info-item bounce">
+                            <span class="label">Name:</span>
+                            <span class="value">Aayushman Thakulla</span>
+                        </div>
+                        <div class="info-item bounce">
+                            <span class="label">Age:</span>
+                            <span class="value">17 years</span>
+                        </div>
+                        <div class="info-item bounce">
+                            <span class="label">Location:</span>
+                            <span class="value">Tikapur, Kailali, Nepal</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 2rem;">
+                <a href="details.html" target="_blank" class="btn primary smart-hover pulse" style="display: inline-block;">Read More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills fade-in-section">
+        <div class="container">
+            <h2 class="animated-gradient-text">Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card smart-hover floating">
+                    <i class="fab fa-html5 rotate"></i>
+                    <h3>HTML</h3>
+                    <p>Semantic, accessible markup</p>
+                </div>
+                <div class="skill-card smart-hover floating">
+                    <i class="fab fa-css3-alt rotate"></i>
+                    <h3>CSS</h3>
+                    <p>Modern layouts, Flexbox, Grid</p>
+                </div>
+                <div class="skill-card smart-hover floating">
+                    <i class="fab fa-python rotate"></i>
+                    <h3>Python</h3>
+                    <p>Programming, scripting, automation</p>
+                </div>
+                <div class="skill-card smart-hover floating">
+                    <i class="fas fa-code rotate"></i>
+                    <h3>C</h3>
+                    <p>Procedural programming, algorithms</p>
+                </div>
+                <div class="skill-card smart-hover floating">
+                    <i class="fas fa-robot rotate"></i>
+                    <h3>Use AI Tools</h3>
+                    <p>ChatBots, AI Agents</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects fade-in-section">
+        <div class="container">
+            <h2 class="animated-gradient-text">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card smart-hover floating">
+                    <div class="project-image">
+                        <img src="images/project-placeholder.jpg" alt="Project Coming Soon" class="project-img">
+                        <div class="project-overlay">
+                            <div class="project-overlay-content">
+                                <h3>Coming Soon</h3>
+                                <p>Exciting projects are in development!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Coming Soon</h3>
+                        <p>Exciting projects are in development!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-preview fade-in-section animated-bg" style="background: linear-gradient(120deg, var(--section-bg) 70%, var(--primary-color) 100%); padding: 4rem 0;">
+        <div class="container" style="text-align:center;">
+            <h2 style="margin-bottom:2rem; color: var(--primary-color); letter-spacing: 1px;" class="rainbow-text">Latest Blog Articles</h2>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:2rem;">
+                <div class="smart-hover floating" style="background:var(--card-bg); padding:2rem 2.5rem; border-radius:16px; max-width:500px; width:100%; box-shadow:0 6px 24px rgba(0,140,186,0.18);">
+                    <a href="how-i-started-coding.html" target="_blank" style="font-size:1.25rem; color:var(--text-color); font-weight:700; text-decoration:none; transition:color 0.2s; letter-spacing:0.5px; display:inline-block;">
+                        How I Started My Coding Journey at 16
+                    </a>
+                </div>
+                <div class="smart-hover floating" style="background:var(--card-bg); padding:2rem 2.5rem; border-radius:16px; max-width:500px; width:100%; box-shadow:0 6px 24px rgba(0,140,186,0.18);">
+                    <a href="top-5-programming-languages-2025.html" target="_blank" style="font-size:1.25rem; color:var(--text-color); font-weight:700; text-decoration:none; transition:color 0.2s; letter-spacing:0.5px; display:inline-block;">
+                        Top 5 Programming Languages to Learn in 2025
+                    </a>
+                </div>
+            </div>
+            <a href="blog.html" target="_blank" class="btn primary smart-hover glow" style="margin-top:2.5rem;">Read More Blog</a>
+        </div>
+        <style>
+            .blog-preview a:hover {
+                color: var(--primary-color) !important;
+                text-decoration: underline;
+            }
+        </style>
+    </section>
+
+    <section id="contact" class="contact fade-in-section">
+        <div class="container">
+            <h2 class="animated-gradient-text">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item smart-hover bounce">
+                        <i class="fas fa-envelope pulse"></i>
+                        <p>Email: aayushmanthakulla@gmail.com</p>
+                    </div>
+                    <div class="contact-item smart-hover bounce">
+                        <i class="fas fa-phone pulse"></i>
+                        <p>Phone: +977-9766097728</p>
+                    </div>
+                </div>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+                        
+                    </div>
+                    <button type="submit" class="btn primary smart-hover glow">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer animated-bg">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://youtube.com/@aayushmancoder1906?si=01GryT816LXw3eBR" target="_blank" title="YouTube" class="smart-hover floating"><i class="fab fa-youtube"></i></a>
+                <a href="https://github.com/aayushman1906" target="_blank" class="smart-hover floating"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/aayushman.thakulla.2025" target="_blank" class="smart-hover floating"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/aayushman1906/" target="_blank" class="smart-hover floating"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="sparkle">&copy; 2025 Aayushman Thakulla. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Smart Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script src="script.js"></script>
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
+        })();
+
+        // Smart Loading Animation - Simplified
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide loading animation immediately when DOM is ready
+            const loadingAnimation = document.getElementById('loadingAnimation');
+            if (loadingAnimation) {
+                loadingAnimation.classList.add('hidden');
+                setTimeout(() => {
+                    loadingAnimation.style.display = 'none';
+                }, 300);
+            }
+        });
+
+        // Additional fallback - hide loading after 1 second regardless
+        setTimeout(() => {
+            const loadingAnimation = document.getElementById('loadingAnimation');
+            if (loadingAnimation) {
+                loadingAnimation.classList.add('hidden');
+                setTimeout(() => {
+                    loadingAnimation.style.display = 'none';
+                }, 300);
+            }
+        }, 1000);
+
+        // Smart Scroll Progress Indicator
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.offsetHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+        });
+
+        // Smart Navigation Highlighting
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smart Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smart Section Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in-section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smart Contact Form with EmailJS
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+            
+            // Simple validation
+            if (!name || !email || !message) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // EmailJS template parameters
+            const templateParams = {
+                to_email: 'aayushmanthakulla@gmail.com',
+                from_name: name,
+                from_email: email,
+                message: message,
+                reply_to: email
+            };
+            
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('Thank you for your message! I will get back to you soon.');
+                    document.getElementById('contactForm').reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('Sorry, there was an error sending your message. Please try again or contact me directly at aayushmanthakulla@gmail.com');
+                })
+                .finally(function() {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+        });
+
+        // Smart Typing Animation
+        const typingText = document.querySelector('.typing-text');
+        if (typingText) {
+            const text = typingText.textContent;
+            typingText.textContent = '';
+            let i = 0;
+            
+            function typeWriter() {
+                if (i < text.length) {
+                    typingText.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            // Start typing animation after page load
+            setTimeout(typeWriter, 1000);
+        }
+    </script>
+</body>
+</html> 
