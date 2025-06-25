@@ -578,7 +578,7 @@
                         <p>Phone: +977-9766097728</p>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm" novalidate>
+                <form action="https://formspree.io/f/xaybcdop" method="POST" class="contact-form" id="contactForm" novalidate>
                     <div class="form-group">
                         <input type="text" id="name" name="name" placeholder="Your Name" required aria-label="Your Name">
                     </div>
@@ -615,14 +615,7 @@
     </div>
 
     <script src="script.js"></script>
-    <!-- EmailJS SDK -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        // Initialize EmailJS
-        (function() {
-            emailjs.init("YOUR_PUBLIC_KEY"); // You'll need to replace this with your actual EmailJS public key
-        })();
-
         // Smart Loading Animation - Simplified
         document.addEventListener('DOMContentLoaded', function() {
             // Hide loading animation immediately when DOM is ready
@@ -709,61 +702,6 @@
 
         document.querySelectorAll('.fade-in-section').forEach(section => {
             observer.observe(section);
-        });
-
-        // Smart Contact Form with EmailJS
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
-            
-            // Simple validation
-            if (!name || !email || !message) {
-                alert('Please fill in all fields');
-                return;
-            }
-            
-            // Email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Please enter a valid email address');
-                return;
-            }
-            
-            // Show loading state
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Sending...';
-            submitBtn.disabled = true;
-            
-            // EmailJS template parameters
-            const templateParams = {
-                to_email: 'aayushmanthakulla@gmail.com',
-                from_name: name,
-                from_email: email,
-                message: message,
-                reply_to: email
-            };
-            
-            // Send email using EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-                .then(function(response) {
-                    console.log('SUCCESS!', response.status, response.text);
-                    alert('Thank you for your message! I will get back to you soon.');
-                    document.getElementById('contactForm').reset();
-                }, function(error) {
-                    console.log('FAILED...', error);
-                    alert('Sorry, there was an error sending your message. Please try again or contact me directly at aayushmanthakulla@gmail.com');
-                })
-                .finally(function() {
-                    // Reset button state
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                });
         });
 
         // Smart Typing Animation
