@@ -198,6 +198,163 @@
             color: white;
         }
         
+        /* Smart Course Cards */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 140, 186, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 140, 186, 0.1);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 140, 186, 0.2);
+        }
+        
+        .course-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .course-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover .course-img {
+            transform: scale(1.1);
+        }
+        
+        .course-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 140, 186, 0.9), rgba(0, 119, 163, 0.9));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .course-card:hover .course-overlay {
+            opacity: 1;
+        }
+        
+        .course-overlay-content {
+            text-align: center;
+            color: white;
+            padding: 1rem;
+        }
+        
+        .course-overlay-content h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .course-price {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+        
+        .course-content {
+            padding: 1.5rem;
+        }
+        
+        .course-content h3 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .course-content p {
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        
+        .course-duration,
+        .course-level {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .course-duration i,
+        .course-level i,
+        .course-students i {
+            color: var(--primary-color);
+        }
+        
+        .course-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--light-text);
+        }
+        
+        .feature i {
+            color: #28a745;
+            font-size: 0.8rem;
+        }
+        
+        .course-students {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Responsive Course Grid */
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .course-card {
+                margin: 0 1rem;
+            }
+            
+            .course-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+        
         /* Smart Contact Form */
         .contact-form {
             position: relative;
@@ -464,7 +621,9 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="courses.html" target="_blank">Courses</a></li>
                 <li><a href="blog.html">Blog</a></li>
+                <li><a href="auth.html" target="_blank">Login</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -564,6 +723,104 @@
                         <p>Exciting projects are in development!</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="courses fade-in-section">
+        <div class="container">
+            <h2 class="animated-gradient-text">Learn With Me</h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: var(--light-text); font-size: 1.1rem;">
+                Master programming and technology skills with my free courses designed for students and beginners.
+            </p>
+            <div class="courses-grid">
+                <div class="course-card smart-hover floating">
+                    <div class="course-image">
+                        <img src="images/python-course.jpg" alt="Python Programming Course" class="course-img">
+                        <div class="course-overlay">
+                            <div class="course-overlay-content">
+                                <h3>Python for Beginners</h3>
+                                <p>Complete Python programming course</p>
+                                <span class="course-price">Free</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Python for Beginners</h3>
+                        <p>Master Python programming from basics to advanced concepts. Perfect for complete beginners! Learn variables, loops, functions, and build real projects.</p>
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="fas fa-clock"></i> 8 hours</span>
+                            <span class="course-level"><i class="fas fa-signal"></i> Beginner</span>
+                            <span class="course-students"><i class="fas fa-users"></i> 500+ students</span>
+                        </div>
+                        <div class="course-features">
+                            <span class="feature"><i class="fas fa-check"></i> 50+ Video Lessons</span>
+                            <span class="feature"><i class="fas fa-check"></i> Practice Exercises</span>
+                            <span class="feature"><i class="fas fa-check"></i> Certificate</span>
+                        </div>
+                        <a href="#" class="btn primary smart-hover glow" onclick="enrollCourse(event, 'Python for Beginners', 'https://youtube.com/@aayushmancoder1906')">Enroll Course</a>
+                    </div>
+                </div>
+                
+                <div class="course-card smart-hover floating">
+                    <div class="course-image">
+                        <img src="images/web-dev-course.jpg" alt="Web Development Course" class="course-img">
+                        <div class="course-overlay">
+                            <div class="course-overlay-content">
+                                <h3>Web Development</h3>
+                                <p>HTML, CSS & JavaScript</p>
+                                <span class="course-price">Free</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3>Web Development Fundamentals</h3>
+                        <p>Learn to build beautiful and responsive websites using HTML, CSS, and JavaScript. Create your own portfolio and web applications.</p>
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="fas fa-clock"></i> 12 hours</span>
+                            <span class="course-level"><i class="fas fa-signal"></i> Beginner</span>
+                            <span class="course-students"><i class="fas fa-users"></i> 300+ students</span>
+                        </div>
+                        <div class="course-features">
+                            <span class="feature"><i class="fas fa-check"></i> 80+ Video Lessons</span>
+                            <span class="feature"><i class="fas fa-check"></i> Live Projects</span>
+                            <span class="feature"><i class="fas fa-check"></i> Responsive Design</span>
+                        </div>
+                        <a href="https://youtube.com/@aayushmancoder1906" target="_blank" class="btn primary smart-hover glow">Start Learning</a>
+                    </div>
+                </div>
+                
+                <div class="course-card smart-hover floating">
+                    <div class="course-image">
+                        <img src="images/ai-course.jpg" alt="AI Tools Course" class="course-img">
+                        <div class="course-overlay">
+                            <div class="course-overlay-content">
+                                <h3>AI Tools Mastery</h3>
+                                <p>Master AI tools & ChatGPT</p>
+                                <span class="course-price">Free</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <h3>AI Tools Mastery</h3>
+                        <p>Learn to use AI tools like ChatGPT, GitHub Copilot, and other AI assistants effectively. Boost your productivity and coding skills.</p>
+                        <div class="course-meta">
+                            <span class="course-duration"><i class="fas fa-clock"></i> 6 hours</span>
+                            <span class="course-level"><i class="fas fa-signal"></i> All Levels</span>
+                            <span class="course-students"><i class="fas fa-users"></i> 200+ students</span>
+                        </div>
+                        <div class="course-features">
+                            <span class="feature"><i class="fas fa-check"></i> 30+ Video Lessons</span>
+                            <span class="feature"><i class="fas fa-check"></i> AI Prompts</span>
+                            <span class="feature"><i class="fas fa-check"></i> Practical Tips</span>
+                        </div>
+                        <a href="https://youtube.com/@aayushmancoder1906" target="_blank" class="btn primary smart-hover glow">Start Learning</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="courses.html" target="_blank" class="btn secondary smart-hover pulse">View All Courses</a>
             </div>
         </div>
     </section>
@@ -750,6 +1007,17 @@
             
             // Start typing animation after page load
             setTimeout(typeWriter, 1000);
+        }
+
+        function enrollCourse(event, courseName, courseUrl) {
+            event.preventDefault();
+            if (localStorage.getItem('student_logged_in') === 'yes') {
+                window.open(courseUrl, '_blank');
+            } else {
+                // Optionally, remember the course for redirect after login
+                localStorage.setItem('pending_course_url', courseUrl);
+                window.location.href = 'auth.html';
+            }
         }
     </script>
 </body>

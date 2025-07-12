@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Login/Signup - Aayushman Thakulla</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+        body {
+            min-height: 100vh;
+            background: #f3f6fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+        }
+        .neumorph-card {
+            background: #fff;
+            border-radius: 32px;
+            box-shadow: 8px 8px 32px #e3e6ec, -8px -8px 32px #ffffff;
+            padding: 3rem 2.5rem 2.5rem 2.5rem;
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+        .neumorph-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.5px;
+        }
+        .neumorph-form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            box-sizing: border-box;
+        }
+        .neumorph-input-group {
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .neumorph-input {
+            width: 100%;
+            padding: 1.1rem 1.1rem 1.1rem 3.2rem;
+            border: none;
+            border-radius: 32px;
+            background: #f3f6fa;
+            box-shadow: 4px 4px 16px #e3e6ec, -4px -4px 16px #ffffff;
+            font-size: 1rem;
+            color: #222;
+            outline: none;
+            transition: box-shadow 0.2s;
+            box-sizing: border-box;
+            display: block;
+        }
+        .neumorph-input:focus {
+            box-shadow: 0 0 0 2px #008CBA33, 4px 4px 16px #e3e6ec, -4px -4px 16px #ffffff;
+        }
+        .neumorph-input-icon {
+            position: absolute;
+            left: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b0b6c3;
+            font-size: 1.1rem;
+        }
+        .neumorph-btn {
+            width: 100%;
+            padding: 1.1rem;
+            border: none;
+            border-radius: 32px;
+            background: #f3f6fa;
+            box-shadow: 4px 4px 16px #e3e6ec, -4px -4px 16px #ffffff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #222;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-sizing: border-box;
+            display: block;
+        }
+        .neumorph-btn:active {
+            box-shadow: 2px 2px 8px #e3e6ec, -2px -2px 8px #ffffff;
+        }
+        .neumorph-btn.primary {
+            background: #008CBA;
+            color: #fff;
+            box-shadow: 0 4px 24px #008cba33, 4px 4px 16px #e3e6ec, -4px -4px 16px #ffffff;
+        }
+        .neumorph-btn.primary:active {
+            background: #0077a3;
+        }
+        .neumorph-divider {
+            width: 100%;
+            text-align: center;
+            color: #b0b6c3;
+            margin: 2rem 0 1.5rem 0;
+            font-size: 0.95rem;
+            position: relative;
+            box-sizing: border-box;
+        }
+        .neumorph-divider:before, .neumorph-divider:after {
+            content: '';
+            display: inline-block;
+            width: 30%;
+            height: 1px;
+            background: #e3e6ec;
+            vertical-align: middle;
+            margin: 0 0.5rem;
+        }
+        .neumorph-google-btn {
+            width: 100%;
+            padding: 1.1rem;
+            border: none;
+            border-radius: 32px;
+            background: #fff;
+            box-shadow: 4px 4px 16px #e3e6ec, -4px -4px 16px #ffffff;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            cursor: pointer;
+            transition: box-shadow 0.2s;
+            box-sizing: border-box;
+        }
+        .neumorph-google-btn:active {
+            box-shadow: 2px 2px 8px #e3e6ec, -2px -2px 8px #ffffff;
+        }
+        .neumorph-google-btn img {
+            width: 22px;
+            height: 22px;
+        }
+        .neumorph-footer {
+            margin-top: 2rem;
+            color: #b0b6c3;
+            font-size: 0.98rem;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .neumorph-footer a {
+            color: #008CBA;
+            text-decoration: none;
+            font-weight: 500;
+            margin-left: 0.3rem;
+            transition: color 0.2s;
+        }
+        .neumorph-footer a:hover {
+            color: #0077a3;
+        }
+        .error-message, .success-message {
+            width: 100%;
+            margin-bottom: 1rem;
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            font-size: 0.98rem;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .error-message {
+            background: #ffeaea;
+            color: #d32f2f;
+        }
+        .success-message {
+            background: #eaffea;
+            color: #388e3c;
+        }
+        @media (max-width: 480px) {
+            .neumorph-card {
+                padding: 1.2rem 0.5rem 1rem 0.5rem;
+                max-width: 98vw;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="neumorph-card">
+        <div class="neumorph-title" id="authTitle">Login Form</div>
+        <div id="messageContainer"></div>
+        <form class="neumorph-form" id="loginForm">
+            <div class="neumorph-input-group">
+                <span class="neumorph-input-icon"><i class="fas fa-envelope"></i></span>
+                <input type="email" id="loginEmail" class="neumorph-input" placeholder="username" required autocomplete="username">
+            </div>
+            <div class="neumorph-input-group">
+                <span class="neumorph-input-icon"><i class="fas fa-lock"></i></span>
+                <input type="password" id="loginPassword" class="neumorph-input" placeholder="password" required autocomplete="current-password">
+            </div>
+            <button type="submit" class="neumorph-btn primary" id="loginSubmit">
+                <span class="btn-text">SIGN IN</span>
+                <span class="loading-spinner" style="display: none;"></span>
+            </button>
+        </form>
+        <div class="neumorph-divider">or</div>
+        <button class="neumorph-google-btn" id="googleSignIn">
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google">
+            Continue with Google
+        </button>
+        <div class="neumorph-footer">
+            <span id="toggleText">Forgot password? or</span>
+            <a id="toggleLink" href="#" tabindex="0" role="button" onclick="event.preventDefault(); toggleForm();">Sign Up</a>
+        </div>
+        <form class="neumorph-form" id="signupForm" style="display: none; margin-top: 1.5rem;">
+            <div class="neumorph-input-group">
+                <span class="neumorph-input-icon"><i class="fas fa-user"></i></span>
+                <input type="text" id="signupName" class="neumorph-input" placeholder="Full Name" required autocomplete="name">
+            </div>
+            <div class="neumorph-input-group">
+                <span class="neumorph-input-icon"><i class="fas fa-envelope"></i></span>
+                <input type="email" id="signupEmail" class="neumorph-input" placeholder="Email Address" required autocomplete="email">
+            </div>
+            <div class="neumorph-input-group">
+                <span class="neumorph-input-icon"><i class="fas fa-lock"></i></span>
+                <input type="password" id="signupPassword" class="neumorph-input" placeholder="Password" required autocomplete="new-password">
+            </div>
+            <div class="neumorph-input-group">
+                <span class="neumorph-input-icon"><i class="fas fa-lock"></i></span>
+                <input type="password" id="signupConfirmPassword" class="neumorph-input" placeholder="Confirm Password" required autocomplete="new-password">
+            </div>
+            <button type="submit" class="neumorph-btn primary" id="signupSubmit">
+                <span class="btn-text">SIGN UP</span>
+                <span class="loading-spinner" style="display: none;"></span>
+            </button>
+        </form>
+    </div>
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+            authDomain: "your-project.firebaseapp.com",
+            projectId: "your-project-id",
+            storageBucket: "your-project.appspot.com",
+            messagingSenderId: "123456789",
+            appId: "1:123456789:web:abcdef123456"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Form Toggle
+        let isLoginForm = true;
+
+        function toggleForm() {
+            isLoginForm = !isLoginForm;
+            document.getElementById('loginForm').style.display = isLoginForm ? 'flex' : 'none';
+            document.getElementById('signupForm').style.display = isLoginForm ? 'none' : 'flex';
+            document.getElementById('authTitle').textContent = isLoginForm ? 'Login Form' : 'Sign Up';
+            document.getElementById('toggleText').textContent = isLoginForm ? 'Forgot password? or' : 'Already have an account?';
+            document.getElementById('toggleLink').textContent = isLoginForm ? 'Sign Up' : 'Sign In';
+        }
+
+        // Password Toggle
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const button = input.nextElementSibling;
+            const icon = button.querySelector('i');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        }
+
+        // Show Message
+        function showMessage(message, type = 'error') {
+            const container = document.getElementById('messageContainer');
+            container.innerHTML = `<div class="${type}-message">${message}</div>`;
+            setTimeout(() => { container.innerHTML = ''; }, 5000);
+        }
+
+        // Loading State
+        function setLoading(buttonId, loading) {
+            const button = document.getElementById(buttonId);
+            const btnText = button.querySelector('.btn-text');
+            const spinner = button.querySelector('.loading-spinner');
+            if (loading) {
+                btnText.style.display = 'none';
+                spinner.style.display = 'inline-block';
+                button.disabled = true;
+            } else {
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+                button.disabled = false;
+            }
+        }
+
+        // Login Form
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            setLoading('loginSubmit', true);
+
+            try {
+                await auth.signInWithEmailAndPassword(email, password);
+                showMessage('Successfully signed in!', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } catch (error) {
+                showMessage(error.message);
+            } finally {
+                setLoading('loginSubmit', false);
+            }
+        });
+
+        // --- SIGNUP FORM HANDLER (SheetDB) ---
+        document.getElementById('signupForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            setLoading('signupSubmit', true);
+            if (!name || !email || !password || !confirmPassword) {
+                showMessage('Please fill in all fields.');
+                setLoading('signupSubmit', false);
+                return;
+            }
+            if (password !== confirmPassword) {
+                showMessage('Passwords do not match.');
+                setLoading('signupSubmit', false);
+                return;
+            }
+            try {
+                // Send data to SheetDB
+                const response = await fetch('https://sheetdb.io/api/v1/2qd8gfvrk5f55', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        data: [{ name, email, password }]
+                    })
+                });
+                if (response.ok) {
+                    showMessage('Account created successfully!', 'success');
+                    setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+                } else {
+                    showMessage('Signup failed. Please try again.');
+                }
+            } catch (error) {
+                showMessage('Signup failed. Please try again.');
+            } finally {
+                setLoading('signupSubmit', false);
+            }
+        });
+
+        // Google Sign In
+        document.getElementById('googleSignIn').addEventListener('click', async () => {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            
+            try {
+                const result = await auth.signInWithPopup(provider);
+                const user = result.user;
+
+                // Save Google user data to Firestore
+                await db.collection('users').doc(user.uid).set({
+                    name: user.displayName,
+                    email: user.email,
+                    photoURL: user.photoURL,
+                    provider: 'google',
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                    lastLogin: firebase.firestore.FieldValue.serverTimestamp()
+                }, { merge: true });
+
+                showMessage('Successfully signed in with Google!', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1500);
+            } catch (error) {
+                showMessage(error.message);
+            }
+        });
+
+        // Auth State Observer
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                console.log('User is signed in:', user.email);
+            } else {
+                console.log('User is signed out');
+            }
+        });
+    </script>
+</body>
+</html> 

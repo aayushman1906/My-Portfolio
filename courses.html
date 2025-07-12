@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#008CBA">
+    <title>Courses - Aayushman Thakulla</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Hero Section */
+        .courses-hero {
+            background: linear-gradient(135deg, #0A1626 0%, #1A273B 50%, #0D1A2F 100%);
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .courses-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(0,140,186,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, #008CBA, #00b4db, #0077A3);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            color: var(--light-text);
+        }
+        
+        /* Course Categories */
+        .categories-section {
+            padding: 4rem 0;
+            background: var(--background);
+        }
+        
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid rgba(0, 140, 186, 0.2);
+            background: var(--card-bg);
+            color: var(--text-color);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 140, 186, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .category-btn:hover::before {
+            left: 100%;
+        }
+        
+        .category-btn.active,
+        .category-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 140, 186, 0.3);
+        }
+        
+        /* Enhanced Course Cards */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        
+        .course-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 140, 186, 0.1);
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0, 140, 186, 0.1);
+            position: relative;
+        }
+        
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0, 140, 186, 0.2);
+        }
+        
+        .course-image {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .course-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .course-card:hover .course-img {
+            transform: scale(1.1);
+        }
+        
+        .course-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 140, 186, 0.95), rgba(0, 119, 163, 0.95));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .course-card:hover .course-overlay {
+            opacity: 1;
+        }
+        
+        .course-overlay-content {
+            text-align: center;
+            color: white;
+            padding: 1.5rem;
+        }
+        
+        .course-overlay-content h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.6rem;
+        }
+        
+        .course-price {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-top: 1rem;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+        }
+        
+        .course-content {
+            padding: 2rem;
+        }
+        
+        .course-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .course-title {
+            color: var(--text-color);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 0;
+            line-height: 1.3;
+        }
+        
+        .course-badge {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .course-description {
+            color: var(--light-text);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+        
+        .course-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(0, 140, 186, 0.05);
+            border-radius: 12px;
+        }
+        
+        .meta-item {
+            text-align: center;
+            color: var(--light-text);
+        }
+        
+        .meta-icon {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .meta-value {
+            font-weight: 600;
+            color: var(--text-color);
+            display: block;
+        }
+        
+        .meta-label {
+            font-size: 0.8rem;
+        }
+        
+        .course-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+            color: var(--light-text);
+        }
+        
+        .feature i {
+            color: #28a745;
+            font-size: 0.9rem;
+            background: rgba(40, 167, 69, 0.1);
+            padding: 0.25rem;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .course-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .enroll-btn {
+            flex: 1;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .enroll-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 140, 186, 0.4);
+        }
+        
+        .preview-btn {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .preview-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Featured Course */
+        .featured-course {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, var(--card-bg) 0%, rgba(0, 140, 186, 0.05) 100%);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .featured-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
+        }
+        
+        /* Loading Animation */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-stats {
+                gap: 2rem;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .course-meta {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .course-actions {
+                flex-direction: column;
+            }
+            
+            .category-filters {
+                gap: 0.5rem;
+            }
+            
+            .category-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Animations */
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stagger-animation > * {
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 0.5rem;">
+                <img src="img2.png" alt="Logo" class="logo-img" style="height: 40px; width: auto;">
+                <span class="logo-text">AT</span>
+            </a>
+            <button class="menu-btn" aria-label="Toggle navigation menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-links">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="#courses" class="active">Courses</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="courses-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title fade-in-up">Master Programming Skills</h1>
+                <p class="hero-subtitle fade-in-up">
+                    Join thousands of students learning programming, web development, and AI tools with my comprehensive courses designed for beginners and intermediate learners.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="category-filters">
+                <button class="category-btn active" data-category="all">All Courses</button>
+                <button class="category-btn" data-category="programming">Programming</button>
+                <button class="category-btn" data-category="web-development">Web Development</button>
+                <button class="category-btn" data-category="ai-ml">AI & ML</button>
+                <button class="category-btn" data-category="data-science">Data Science</button>
+                <button class="category-btn" data-category="mobile">Mobile Dev</button>
+                <button class="category-btn" data-category="cybersecurity">Cybersecurity</button>
+            </div>
+
+            <div class="courses-grid stagger-animation">
+                <!-- Featured Course -->
+                <div class="course-card featured-course" data-category="programming" style="--i: 0;">
+                    <div class="featured-badge">🔥 Featured</div>
+                    <div class="course-image">
+                        <img src="images/python-course.jpg" alt="Python Programming Course" class="course-img">
+                        <div class="course-overlay">
+                            <div class="course-overlay-content">
+                                <h3>Python for Beginners</h3>
+                                <p>Complete Python programming course</p>
+                                <span class="course-price">Free</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">Python for Beginners - Complete Course</h3>
+                            <span class="course-badge">Popular</span>
+                        </div>
+                        <p class="course-description">
+                            Master Python programming from absolute basics to advanced concepts. Learn variables, loops, functions, OOP, and build real-world projects. Perfect for complete beginners!
+                        </p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock meta-icon"></i>
+                                <span class="meta-value">8 hours</span>
+                                <span class="meta-label">Duration</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-signal meta-icon"></i>
+                                <span class="meta-value">Beginner</span>
+                                <span class="meta-label">Level</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users meta-icon"></i>
+                                <span class="meta-value">500+</span>
+                                <span class="meta-label">Students</span>
+                            </div>
+                        </div>
+                        <div class="course-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>50+ Video Lessons</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Practice Exercises & Quizzes</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Real-World Projects</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Certificate of Completion</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="https://youtube.com/@aayushmancoder1906" target="_blank" class="enroll-btn">
+                                <i class="fas fa-play"></i>
+                                Start Learning
+                            </a>
+                            <a href="#" class="preview-btn">
+                                <i class="fas fa-eye"></i>
+                                Preview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Development Course -->
+                <div class="course-card" data-category="web-development" style="--i: 1;">
+                    <div class="course-image">
+                        <img src="images/web-dev-course.jpg" alt="Web Development Course" class="course-img">
+                        <div class="course-overlay">
+                            <div class="course-overlay-content">
+                                <h3>Web Development</h3>
+                                <p>HTML, CSS & JavaScript</p>
+                                <span class="course-price">Free</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">Web Development Fundamentals</h3>
+                            <span class="course-badge">New</span>
+                        </div>
+                        <p class="course-description">
+                            Learn to build beautiful and responsive websites using HTML, CSS, and JavaScript. Create your own portfolio, e-commerce sites, and web applications.
+                        </p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock meta-icon"></i>
+                                <span class="meta-value">12 hours</span>
+                                <span class="meta-label">Duration</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-signal meta-icon"></i>
+                                <span class="meta-value">Beginner</span>
+                                <span class="meta-label">Level</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users meta-icon"></i>
+                                <span class="meta-value">300+</span>
+                                <span class="meta-label">Students</span>
+                            </div>
+                        </div>
+                        <div class="course-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>80+ Video Lessons</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Live Coding Projects</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Responsive Design</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="https://youtube.com/@aayushmancoder1906" target="_blank" class="enroll-btn">
+                                <i class="fas fa-play"></i>
+                                Start Learning
+                            </a>
+                            <a href="#" class="preview-btn">
+                                <i class="fas fa-eye"></i>
+                                Preview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Tools Course -->
+                <div class="course-card" data-category="ai-ml" style="--i: 2;">
+                    <div class="course-image">
+                        <img src="images/ai-course.jpg" alt="AI Tools Course" class="course-img">
+                        <div class="course-overlay">
+                            <div class="course-overlay-content">
+                                <h3>AI Tools Mastery</h3>
+                                <p>Master AI tools & ChatGPT</p>
+                                <span class="course-price">Free</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">AI Tools Mastery</h3>
+                            <span class="course-badge">Trending</span>
+                        </div>
+                        <p class="course-description">
+                            Learn to use AI tools like ChatGPT, GitHub Copilot, and other AI assistants effectively. Boost your productivity and coding skills with AI.
+                        </p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock meta-icon"></i>
+                                <span class="meta-value">6 hours</span>
+                                <span class="meta-label">Duration</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-signal meta-icon"></i>
+                                <span class="meta-value">All Levels</span>
+                                <span class="meta-label">Level</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users meta-icon"></i>
+                                <span class="meta-value">200+</span>
+                                <span class="meta-label">Students</span>
+                            </div>
+                        </div>
+                        <div class="course-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>30+ Video Lessons</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>AI Prompt Engineering</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Practical Tips & Tricks</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="https://youtube.com/@aayushmancoder1906" target="_blank" class="enroll-btn">
+                                <i class="fas fa-play"></i>
+                                Start Learning
+                            </a>
+                            <a href="#" class="preview-btn">
+                                <i class="fas fa-eye"></i>
+                                Preview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- C Programming Course -->
+                <div class="course-card" data-category="programming" style="--i: 3;">
+                    <div class="course-image">
+                        <img src="images/c-course.jpg" alt="C Programming Course" class="course-img">
+                        <div class="course-overlay">
+                            <div class="course-overlay-content">
+                                <h3>C Programming</h3>
+                                <p>Learn C from scratch</p>
+                                <span class="course-price">Free</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">C Programming Fundamentals</h3>
+                            <span class="course-badge">Classic</span>
+                        </div>
+                        <p class="course-description">
+                            Master C programming language from basics to advanced concepts. Learn pointers, memory management, and build efficient programs.
+                        </p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock meta-icon"></i>
+                                <span class="meta-value">10 hours</span>
+                                <span class="meta-label">Duration</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-signal meta-icon"></i>
+                                <span class="meta-value">Intermediate</span>
+                                <span class="meta-label">Level</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users meta-icon"></i>
+                                <span class="meta-value">150+</span>
+                                <span class="meta-label">Students</span>
+                            </div>
+                        </div>
+                        <div class="course-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>60+ Video Lessons</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Memory Management</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Algorithm Implementation</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="https://youtube.com/@aayushmancoder1906" target="_blank" class="enroll-btn">
+                                <i class="fas fa-play"></i>
+                                Start Learning
+                            </a>
+                            <a href="#" class="preview-btn">
+                                <i class="fas fa-eye"></i>
+                                Preview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Data Science Course -->
+                <div class="course-card" data-category="data-science" style="--i: 4;">
+                    <div class="course-image">
+                        <img src="images/data-science-course.jpg" alt="Data Science Course" class="course-img">
+                        <div class="course-overlay">
+                            <div class="course-overlay-content">
+                                <h3>Data Science</h3>
+                                <p>Python for Data Analysis</p>
+                                <span class="course-price">Free</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">Data Science with Python</h3>
+                            <span class="course-badge">Advanced</span>
+                        </div>
+                        <p class="course-description">
+                            Learn data analysis, visualization, and machine learning with Python. Master pandas, numpy, matplotlib, and scikit-learn.
+                        </p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock meta-icon"></i>
+                                <span class="meta-value">15 hours</span>
+                                <span class="meta-label">Duration</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-signal meta-icon"></i>
+                                <span class="meta-value">Advanced</span>
+                                <span class="meta-label">Level</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users meta-icon"></i>
+                                <span class="meta-value">100+</span>
+                                <span class="meta-label">Students</span>
+                            </div>
+                        </div>
+                        <div class="course-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>100+ Video Lessons</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Real Data Projects</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Machine Learning Basics</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="https://youtube.com/@aayushmancoder1906" target="_blank" class="enroll-btn">
+                                <i class="fas fa-play"></i>
+                                Start Learning
+                            </a>
+                            <a href="#" class="preview-btn">
+                                <i class="fas fa-eye"></i>
+                                Preview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cybersecurity Course -->
+                <div class="course-card" data-category="cybersecurity" style="--i: 5;">
+                    <div class="course-image">
+                        <img src="images/cybersecurity-course.jpg" alt="Cybersecurity Course" class="course-img">
+                        <div class="course-overlay">
+                            <div class="course-overlay-content">
+                                <h3>Cybersecurity</h3>
+                                <p>Ethical Hacking Basics</p>
+                                <span class="course-price">Free</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-header">
+                            <h3 class="course-title">Cybersecurity Fundamentals</h3>
+                            <span class="course-badge">Hot</span>
+                        </div>
+                        <p class="course-description">
+                            Learn cybersecurity basics, ethical hacking, and how to protect systems from cyber threats. Perfect for security enthusiasts.
+                        </p>
+                        <div class="course-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-clock meta-icon"></i>
+                                <span class="meta-value">8 hours</span>
+                                <span class="meta-label">Duration</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-signal meta-icon"></i>
+                                <span class="meta-value">Intermediate</span>
+                                <span class="meta-label">Level</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-users meta-icon"></i>
+                                <span class="meta-value">80+</span>
+                                <span class="meta-label">Students</span>
+                            </div>
+                        </div>
+                        <div class="course-features">
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>40+ Video Lessons</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Hands-on Labs</span>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-check"></i>
+                                <span>Security Tools</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <a href="https://youtube.com/@aayushmancoder1906" target="_blank" class="enroll-btn">
+                                <i class="fas fa-play"></i>
+                                Start Learning
+                            </a>
+                            <a href="#" class="preview-btn">
+                                <i class="fas fa-eye"></i>
+                                Preview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer animated-bg">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://youtube.com/@aayushmancoder1906?si=01GryT816LXw3eBR" target="_blank" title="YouTube" class="smart-hover floating"><i class="fab fa-youtube"></i></a>
+                <a href="https://github.com/aayushman1906" target="_blank" class="smart-hover floating"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/aayushman.thakulla.2025" target="_blank" class="smart-hover floating"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/aayushman1906/" target="_blank" class="smart-hover floating"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="sparkle">&copy; 2025 Aayushman Thakulla. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Category Filtering
+        document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                document.querySelectorAll('.category-btn').forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.dataset.category;
+                const courses = document.querySelectorAll('.course-card');
+                
+                courses.forEach(course => {
+                    if (category === 'all' || course.dataset.category === category) {
+                        course.style.display = 'block';
+                        course.style.animation = 'fadeInUp 0.6s ease forwards';
+                    } else {
+                        course.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.course-card, .hero-content > *, .stat-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html> 
