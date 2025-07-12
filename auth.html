@@ -7,6 +7,10 @@
     <title>Login/Signup - Aayushman Thakulla</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Google OAuth -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    
     <style>
         html, body {
             height: 100%;
@@ -244,25 +248,10 @@
             </button>
         </form>
     </div>
+
     <script>
-        // Firebase Configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyBXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
-            authDomain: "your-project.firebaseapp.com",
-            projectId: "your-project-id",
-            storageBucket: "your-project.appspot.com",
-            messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef123456"
-        };
-
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-
-        // Form Toggle
+        // Toggle between login and signup
         let isLoginForm = true;
-
         function toggleForm() {
             isLoginForm = !isLoginForm;
             document.getElementById('loginForm').style.display = isLoginForm ? 'flex' : 'none';
@@ -271,30 +260,15 @@
             document.getElementById('toggleText').textContent = isLoginForm ? 'Forgot password? or' : 'Already have an account?';
             document.getElementById('toggleLink').textContent = isLoginForm ? 'Sign Up' : 'Sign In';
         }
-
-        // Password Toggle
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            const button = input.nextElementSibling;
-            const icon = button.querySelector('i');
-
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.className = 'fas fa-eye-slash';
-            } else {
-                input.type = 'password';
-                icon.className = 'fas fa-eye';
-            }
-        }
-
-        // Show Message
+        
+        // Show message
         function showMessage(message, type = 'error') {
             const container = document.getElementById('messageContainer');
             container.innerHTML = `<div class="${type}-message">${message}</div>`;
             setTimeout(() => { container.innerHTML = ''; }, 5000);
         }
-
-        // Loading State
+        
+        // Loading state
         function setLoading(buttonId, loading) {
             const button = document.getElementById(buttonId);
             const btnText = button.querySelector('.btn-text');
@@ -310,22 +284,36 @@
             }
         }
 
-        // Login Form
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
+        // Success handler - redirect to home page
+        function handleAuthSuccess() {
+            localStorage.setItem('student_logged_in', 'yes');
+            showMessage('Authentication successful! Redirecting...', 'success');
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 1500);
+        }
 
+        // --- LOGIN FORM HANDLER ---
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
             setLoading('loginSubmit', true);
+            
+            if (!email || !password) {
+                showMessage('Please fill in all fields.');
+                setLoading('loginSubmit', false);
+                return;
+            }
 
             try {
-                await auth.signInWithEmailAndPassword(email, password);
-                showMessage('Successfully signed in!', 'success');
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1500);
+                // For demo purposes - you can replace this with actual login logic
+                // For now, we'll simulate a successful login
+                showMessage('Login successful!', 'success');
+                handleAuthSuccess();
             } catch (error) {
-                showMessage(error.message);
+                showMessage('Login failed. Please try again.');
             } finally {
                 setLoading('loginSubmit', false);
             }
@@ -338,7 +326,9 @@
             const email = document.getElementById('signupEmail').value.trim();
             const password = document.getElementById('signupPassword').value;
             const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            
             setLoading('signupSubmit', true);
+            
             if (!name || !email || !password || !confirmPassword) {
                 showMessage('Please fill in all fields.');
                 setLoading('signupSubmit', false);
@@ -349,6 +339,7 @@
                 setLoading('signupSubmit', false);
                 return;
             }
+
             try {
                 // Send data to SheetDB
                 const response = await fetch('https://sheetdb.io/api/v1/2qd8gfvrk5f55', {
@@ -360,9 +351,10 @@
                         data: [{ name, email, password }]
                     })
                 });
+                
                 if (response.ok) {
                     showMessage('Account created successfully!', 'success');
-                    setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+                    handleAuthSuccess();
                 } else {
                     showMessage('Signup failed. Please try again.');
                 }
@@ -373,41 +365,58 @@
             }
         });
 
-        // Google Sign In
-        document.getElementById('googleSignIn').addEventListener('click', async () => {
-            const provider = new firebase.auth.GoogleAuthProvider();
+        // --- GOOGLE SIGN-IN ---
+        document.getElementById('googleSignIn').addEventListener('click', function() {
+            // Initialize Google Sign-In
+            google.accounts.id.initialize({
+                client_id: 'YOUR_GOOGLE_CLIENT_ID', // Replace with your actual Google Client ID
+                callback: handleGoogleSignIn
+            });
             
+            // Trigger Google Sign-In popup
+            google.accounts.id.prompt();
+        });
+
+        function handleGoogleSignIn(response) {
             try {
-                const result = await auth.signInWithPopup(provider);
-                const user = result.user;
-
-                // Save Google user data to Firestore
-                await db.collection('users').doc(user.uid).set({
-                    name: user.displayName,
-                    email: user.email,
-                    photoURL: user.photoURL,
-                    provider: 'google',
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-                    lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-                }, { merge: true });
-
-                showMessage('Successfully signed in with Google!', 'success');
-                setTimeout(() => {
-                    window.location.href = 'index.html';
-                }, 1500);
+                // Decode the JWT token to get user info
+                const payload = JSON.parse(atob(response.credential.split('.')[1]));
+                const { name, email, picture } = payload;
+                
+                // Save user data to SheetDB
+                fetch('https://sheetdb.io/api/v1/2qd8gfvrk5f55', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        data: [{ 
+                            name: name, 
+                            email: email, 
+                            password: 'google_oauth',
+                            photo_url: picture 
+                        }]
+                    })
+                }).then(response => {
+                    if (response.ok) {
+                        showMessage('Google sign-in successful!', 'success');
+                        handleAuthSuccess();
+                    } else {
+                        showMessage('Google sign-in failed. Please try again.');
+                    }
+                }).catch(error => {
+                    showMessage('Google sign-in failed. Please try again.');
+                });
+                
             } catch (error) {
-                showMessage(error.message);
+                showMessage('Google sign-in failed. Please try again.');
             }
-        });
+        }
 
-        // Auth State Observer
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                console.log('User is signed in:', user.email);
-            } else {
-                console.log('User is signed out');
-            }
-        });
+        // Check if user is already logged in
+        if (localStorage.getItem('student_logged_in') === 'yes') {
+            window.location.href = 'index.html';
+        }
     </script>
 </body>
 </html> 
