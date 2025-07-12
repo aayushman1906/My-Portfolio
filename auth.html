@@ -341,14 +341,17 @@
             }
 
             try {
-                // Send data to SheetDB
+                // Send data to SheetDB - Fixed format
                 const response = await fetch('https://sheetdb.io/api/v1/2qd8gfvrk5f55', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        data: [{ name, email, password }]
+                        name: name,
+                        email: email,
+                        password: password,
+                        created_at: new Date().toISOString()
                     })
                 });
                 
@@ -383,19 +386,18 @@
                 const payload = JSON.parse(atob(response.credential.split('.')[1]));
                 const { name, email, picture } = payload;
                 
-                // Save user data to SheetDB
+                // Save user data to SheetDB - Fixed format
                 fetch('https://sheetdb.io/api/v1/2qd8gfvrk5f55', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        data: [{ 
-                            name: name, 
-                            email: email, 
-                            password: 'google_oauth',
-                            photo_url: picture 
-                        }]
+                        name: name,
+                        email: email,
+                        password: 'google_oauth',
+                        photo_url: picture,
+                        created_at: new Date().toISOString()
                     })
                 }).then(response => {
                     if (response.ok) {
