@@ -1,10 +1,4 @@
 // Firebase Configuration
-// REPLACE THESE VALUES WITH YOUR OWN FIREBASE PROJECT CONFIGURATION
-// 1. Go to console.firebase.google.com
-// 2. Create a new project
-// 3. Go to Project Settings -> General -> Your apps -> Web app
-// 4. Copy the "firebaseConfig" object values here
-
 const firebaseConfig = {
     apiKey: "AIzaSyDzE2tJ-VE34M3RQeHhgFi_86DWFG_vFGo",
     authDomain: "my-portfolio-de506.firebaseapp.com",
@@ -15,6 +9,14 @@ const firebaseConfig = {
     measurementId: "G-0QG5X05JK4"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// Initialize Firebase (Compat / Namespaced version)
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+
+// Export auth and db for use in other files
+const auth = firebase.auth();
+const db = firebase.firestore();
+
+// Optional: Analytics (requires firebase-analytics.js script to be loaded, ignoring for now to ensure Auth/DB works)
+// const analytics = firebase.analytics();
