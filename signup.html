@@ -292,12 +292,17 @@
                     })
                     .catch((error) => {
                         console.error(error);
-                        var errorCode = error.code;
                         var errorMessage = error.message;
-                        alert("Error: " + errorMessage);
 
-                        submitBtn.innerText = originalBtnText;
-                        submitBtn.disabled = false;
+                        // If user was created but Firestore failed (likely permission error)
+                        if (errorMessage.includes("permission-denied") || errorMessage.includes("Missing or insufficient permissions")) {
+                            alert("Account created, but could not save profile data. Please check Firestore security rules. You can still login.");
+                            window.location.href = "login.html";
+                        } else {
+                            alert("Error: " + errorMessage);
+                            submitBtn.innerText = originalBtnText;
+                            submitBtn.disabled = false;
+                        }
                     });
             });
         }
