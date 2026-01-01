@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Aayushman Thakulla</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #ecf0f3;
+        }
+
+        .signup-card {
+            position: relative;
+            width: 380px;
+            /* Slightly wider for more fields */
+            padding: 40px 40px;
+            border-radius: 20px;
+            background: #ecf0f3;
+            box-shadow: 14px 14px 20px #cbced1, -14px -14px 20px white;
+        }
+
+        .signup-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            background: #ecf0f3;
+            border: none;
+            outline: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            box-shadow: inset 6px 6px 6px #cbced1, inset -6px -6px 6px white;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .form-input::placeholder {
+            color: #777;
+            font-weight: 400;
+            opacity: 0.8;
+        }
+
+        .signup-btn {
+            display: block;
+            width: 100%;
+            margin-top: 30px;
+            background: #ecf0f3;
+            color: #333;
+            font-weight: 700;
+            border: none;
+            outline: none;
+            height: 50px;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 10px 10px 15px #cbced1, -10px -10px 15px white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .signup-btn:hover {
+            box-shadow: 6px 6px 10px #cbced1, -6px -6px 10px white;
+            transform: scale(0.98);
+        }
+
+        .signup-btn:active {
+            box-shadow: inset 4px 4px 4px #cbced1, inset -4px -4px 4px white;
+            font-size: 15px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 13px;
+            color: #777;
+        }
+
+        .login-link a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Home Link */
+        .home-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            text-decoration: none;
+            color: #555;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 6px 6px 10px #cbced1, -6px -6px 10px white;
+            transition: all 0.3s ease;
+        }
+
+        .home-link:hover {
+            box-shadow: inset 4px 4px 4px #cbced1, inset -4px -4px 4px white;
+            color: #333;
+        }
+
+        /* Error message style */
+        .error-message {
+            color: #ef4444;
+            font-size: 12px;
+            margin-top: 5px;
+            margin-left: 10px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+    </style>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+    <a href="index.html" class="home-link" title="Back to Home">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="signup-card">
+        <h1 class="signup-title">Sign Up</h1>
+
+        <form id="signupForm" action="https://formsubmit.co/thakullaaayushman@gmail.com" method="POST">
+            <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-input" name="fullname" placeholder="Full Name" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" name="email" placeholder="Email Address" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Password</label>
+                <input type="password" class="form-input" id="password" name="password" placeholder="********" required
+                    minlength="8">
+                <div class="error-message" id="passwordError"></div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Confirm Password</label>
+                <input type="password" class="form-input" id="confirmPassword" name="confirmPassword"
+                    placeholder="********" required>
+                <div class="error-message" id="confirmPasswordError"></div>
+            </div>
+
+            <input type="hidden" name="_subject" value="New Sign Up - Portfolio Website">
+            <input type="hidden" name="_next" value="signup.html">
+
+            <button type="submit" class="signup-btn">
+                Sign Up
+            </button>
+        </form>
+
+        <div class="login-link">
+            Already have an account? <a href="login.html">Login</a>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="firebase-config.js"></script>
+    <script>
+        // Password visibility toggle
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const passwordError = document.getElementById('passwordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        const signupForm = document.getElementById('signupForm');
+
+        function checkPasswordMatch() {
+            if (confirmPasswordInput.value && passwordInput.value) {
+                if (confirmPasswordInput.value !== passwordInput.value) {
+                    confirmPasswordError.textContent = 'Passwords do not match';
+                    confirmPasswordError.classList.add('show');
+                } else {
+                    confirmPasswordError.classList.remove('show');
+                }
+            }
+        }
+
+        if (passwordInput && confirmPasswordInput) {
+            passwordInput.addEventListener('input', function () {
+                if (this.value.length > 0 && this.value.length < 8) {
+                    passwordError.textContent = 'Password must be at least 8 characters';
+                    passwordError.classList.add('show');
+                } else {
+                    passwordError.classList.remove('show');
+                }
+                checkPasswordMatch();
+            });
+
+            confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+        }
+
+        if (signupForm) {
+            signupForm.addEventListener('submit', function (e) {
+                e.preventDefault(); // Prevent default form submission
+
+                const fullname = signupForm.fullname.value;
+                const email = signupForm.email.value;
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+
+                if (password.length < 8) {
+                    passwordError.textContent = 'Password must be at least 8 characters';
+                    passwordError.classList.add('show');
+                    return;
+                }
+
+                if (password !== confirmPassword) {
+                    confirmPasswordError.textContent = 'Passwords do not match';
+                    confirmPasswordError.classList.add('show');
+                    return;
+                }
+
+                // Change button text to indicate loading
+                const submitBtn = signupForm.querySelector('.signup-btn');
+                const originalBtnText = submitBtn.innerText;
+                submitBtn.innerText = 'Creating Account...';
+                submitBtn.disabled = true;
+
+                // Firebase Sign Up
+                auth.createUserWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        // Signed in 
+                        var user = userCredential.user;
+
+                        // Store additional user data in Firestore
+                        return db.collection("users").doc(user.uid).set({
+                            fullname: fullname,
+                            email: email,
+                            signupDate: new Date().toISOString(),
+                            role: 'user' // Default role
+                        });
+                    })
+                    .then(() => {
+                        alert("Account created successfully!");
+                        window.location.href = "login.html";
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        var errorCode = error.code;
+                        var errorMessage = error.message;
+                        alert("Error: " + errorMessage);
+
+                        submitBtn.innerText = originalBtnText;
+                        submitBtn.disabled = false;
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>

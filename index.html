@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,12 +17,15 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        html, body {
+        html,
+        body {
             max-width: 100vw;
             overflow-x: hidden;
         }
+
         /* Smart Scroll Progress Indicator */
         .scroll-progress {
             position: fixed;
@@ -33,16 +37,16 @@
             z-index: 1001;
             transition: width 0.1s ease;
         }
-        
+
         /* Smart Navigation Highlighting */
         .nav-links a.active {
             color: var(--primary-color) !important;
         }
-        
+
         .nav-links a.active::after {
             width: 100% !important;
         }
-        
+
         /* Animated Gradient Text */
         .animated-gradient-text {
             background: linear-gradient(-45deg, #008CBA, #00b4db, #0077A3, #008CBA);
@@ -52,55 +56,90 @@
             background-clip: text;
             animation: gradientShift 3s ease infinite;
         }
-        
+
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
-        
+
         /* Floating Animation */
         .floating {
             animation: floating 3s ease-in-out infinite;
         }
-        
+
         @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
-        
+
         /* Pulse Animation */
         .pulse {
             animation: pulse 2s ease-in-out infinite;
         }
-        
+
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
         }
-        
+
         /* Glow Effect */
         .glow {
             animation: glow 2s ease-in-out infinite alternate;
         }
-        
+
         @keyframes glow {
-            from { box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color), 0 0 15px var(--primary-color); }
-            to { box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color); }
+            from {
+                box-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color), 0 0 15px var(--primary-color);
+            }
+
+            to {
+                box-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+            }
         }
-        
+
         /* Typing Animation */
         .typing-text {
             border-right: 3px solid var(--primary-color);
             white-space: nowrap;
             animation: blink 1s infinite;
         }
-        
+
         @keyframes blink {
-            0%, 50% { border-color: var(--primary-color); }
-            51%, 100% { border-color: transparent; }
+
+            0%,
+            50% {
+                border-color: var(--primary-color);
+            }
+
+            51%,
+            100% {
+                border-color: transparent;
+            }
         }
-        
+
         /* Rainbow Text Animation */
         .rainbow-text {
             background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
@@ -110,50 +149,83 @@
             background-clip: text;
             animation: rainbow 4s linear infinite;
         }
-        
+
         @keyframes rainbow {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 100% 50%;
+            }
         }
-        
+
         /* Bounce Animation */
         .bounce {
             animation: bounce 2s infinite;
         }
-        
+
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
         }
-        
+
         /* Rotate Animation */
         .rotate {
             animation: rotate 4s linear infinite;
         }
-        
+
         @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
-        
+
         /* Shake Animation */
         .shake {
             animation: shake 0.5s ease-in-out infinite;
         }
-        
+
         @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-5px);
+            }
+
+            75% {
+                transform: translateX(5px);
+            }
         }
-        
+
         /* Smart Skill Cards */
         .skill-card {
             position: relative;
             overflow: hidden;
         }
-        
+
         .skill-card::after {
             content: '';
             position: absolute;
@@ -164,17 +236,17 @@
             background: linear-gradient(90deg, transparent, rgba(0, 140, 186, 0.2), transparent);
             transition: left 0.6s ease;
         }
-        
+
         .skill-card:hover::after {
             left: 100%;
         }
-        
+
         /* Smart Project Cards */
         .project-card {
             position: relative;
             overflow: hidden;
         }
-        
+
         .project-overlay {
             position: absolute;
             top: 0;
@@ -188,33 +260,33 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         .project-card:hover .project-overlay {
             opacity: 1;
         }
-        
+
         .project-overlay-content {
             text-align: center;
             color: white;
         }
-        
+
         /* Smart Contact Form */
         .contact-form {
             position: relative;
         }
-        
+
         .form-group {
             position: relative;
         }
-        
-        .form-group input:focus + label,
-        .form-group textarea:focus + label,
-        .form-group input:not(:placeholder-shown) + label,
-        .form-group textarea:not(:placeholder-shown) + label {
+
+        .form-group input:focus+label,
+        .form-group textarea:focus+label,
+        .form-group input:not(:placeholder-shown)+label,
+        .form-group textarea:not(:placeholder-shown)+label {
             transform: translateY(-25px) scale(0.8);
             color: var(--primary-color);
         }
-        
+
         .form-group label {
             position: absolute;
             left: 1rem;
@@ -223,7 +295,7 @@
             transition: all 0.3s ease;
             pointer-events: none;
         }
-        
+
         /* Smart Loading Animation */
         .loading-animation {
             position: fixed;
@@ -232,18 +304,19 @@
             width: 100%;
             height: 100%;
             background: var(--background);
-            display: none; /* Temporarily hidden by default */
+            display: none;
+            /* Temporarily hidden by default */
             align-items: center;
             justify-content: center;
             z-index: 9999;
             transition: opacity 0.5s ease;
         }
-        
+
         .loading-animation.hidden {
             opacity: 0;
             pointer-events: none;
         }
-        
+
         .loading-spinner {
             width: 50px;
             height: 50px;
@@ -252,12 +325,17 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-        
+
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
-        
+
         /* Smart Back to Top Button */
         .back-to-top {
             position: fixed;
@@ -277,57 +355,67 @@
             transition: all 0.3s ease;
             z-index: 1000;
         }
-        
+
         .back-to-top.visible {
             opacity: 1;
             visibility: visible;
         }
-        
+
         .back-to-top:hover {
             background: var(--secondary-color);
             transform: translateY(-3px);
         }
-        
+
         /* Smart Section Transitions */
         .fade-in-section {
-            opacity: 1; /* Changed from 0 to 1 - always visible by default */
-            transform: translateY(0); /* Changed from translateY(50px) to translateY(0) */
+            opacity: 1;
+            /* Changed from 0 to 1 - always visible by default */
+            transform: translateY(0);
+            /* Changed from translateY(50px) to translateY(0) */
             transition: all 0.8s ease;
         }
-        
+
         .fade-in-section.visible {
             opacity: 1;
             transform: translateY(0);
         }
-        
+
         /* Smart Hover Effects */
         .smart-hover {
             transition: all 0.3s ease;
         }
-        
+
         .smart-hover:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0, 140, 186, 0.3);
         }
-        
+
         /* Animated Background */
         .animated-bg {
             background: linear-gradient(-45deg, #0A1626, #0D1A2F, #1A273B, #0A1626);
             background-size: 400% 400%;
             animation: bgShift 8s ease infinite;
         }
-        
+
         @keyframes bgShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
-        
+
         /* Sparkle Effect */
         .sparkle {
             position: relative;
         }
-        
+
         .sparkle::before,
         .sparkle::after {
             content: '✨';
@@ -336,24 +424,33 @@
             opacity: 0;
             animation: sparkle 2s ease-in-out infinite;
         }
-        
+
         .sparkle::before {
             left: -20px;
             top: 0;
             animation-delay: 0s;
         }
-        
+
         .sparkle::after {
             right: -20px;
             bottom: 0;
             animation-delay: 1s;
         }
-        
+
         @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
-        
+
         /* Enhanced Mobile Menu Styles */
         .menu-btn {
             display: none;
@@ -366,17 +463,17 @@
             transition: all 0.3s ease;
             z-index: 1002;
         }
-        
+
         .menu-btn:hover {
             color: var(--primary-color);
             transform: scale(1.1);
         }
-        
+
         .menu-btn:focus {
             outline: none;
             color: var(--primary-color);
         }
-        
+
         /* Touch-friendly button sizes for mobile */
         @media (max-width: 767px) {
             .menu-btn {
@@ -387,7 +484,7 @@
                 align-items: center;
                 justify-content: center;
             }
-            
+
             .btn {
                 min-height: 44px;
                 min-width: 44px;
@@ -395,15 +492,16 @@
                 align-items: center;
                 justify-content: center;
             }
-            
+
             .social-links a {
                 min-width: 44px;
                 min-height: 44px;
             }
         }
-        
+
         /* Prevent text selection on mobile */
         @media (max-width: 767px) {
+
             .nav-links a,
             .btn,
             .menu-btn {
@@ -423,7 +521,7 @@
                 left: 0;
                 width: 100vw;
                 height: 40vh;
-                background: rgba(10,22,38,0.98);
+                background: rgba(10, 22, 38, 0.98);
                 display: none;
                 flex-direction: column;
                 align-items: center;
@@ -431,9 +529,11 @@
                 z-index: 9999;
                 padding-top: 2.5rem;
             }
+
             .nav-links.active {
                 display: flex !important;
             }
+
             .menu-btn {
                 display: block;
                 z-index: 10000;
@@ -441,12 +541,13 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Smart Loading Animation -->
     <div class="loading-animation" id="loadingAnimation">
         <div class="loading-spinner"></div>
     </div>
-    
+
     <!-- Smart Scroll Progress Indicator -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -466,6 +567,7 @@
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </div>
     </nav>
@@ -489,7 +591,8 @@
                     <img src="profile.jpg" alt="Aayushman Thakulla" class="profile-image">
                 </div>
                 <div class="about-text">
-                    <p>I am a 17-year-old aspiring developer passionate about creating innovative solutions through technology. I love learning new technologies and building projects that make a difference.</p>
+                    <p>I am a 17-year-old aspiring developer passionate about creating innovative solutions through
+                        technology. I love learning new technologies and building projects that make a difference.</p>
                     <div class="personal-info">
                         <div class="info-item bounce">
                             <span class="label">Name:</span>
@@ -507,7 +610,8 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 2rem;">
-                <a href="details.html" target="_blank" class="btn primary smart-hover pulse" style="display: inline-block;">Read More</a>
+                <a href="details.html" target="_blank" class="btn primary smart-hover pulse"
+                    style="display: inline-block;">Read More</a>
             </div>
         </div>
     </section>
@@ -568,22 +672,29 @@
         </div>
     </section>
 
-    <section class="blog-preview fade-in-section animated-bg" style="background: linear-gradient(120deg, var(--section-bg) 70%, var(--primary-color) 100%); padding: 4rem 0;">
+    <section class="blog-preview fade-in-section animated-bg"
+        style="background: linear-gradient(120deg, var(--section-bg) 70%, var(--primary-color) 100%); padding: 4rem 0;">
         <div class="container" style="text-align:center;">
-            <h2 style="margin-bottom:2rem; color: var(--primary-color); letter-spacing: 1px;" class="rainbow-text">Latest Blog Articles</h2>
+            <h2 style="margin-bottom:2rem; color: var(--primary-color); letter-spacing: 1px;" class="rainbow-text">
+                Latest Blog Articles</h2>
             <div style="display:flex; flex-direction:column; align-items:center; gap:2rem;">
-                <div class="smart-hover floating" style="background:var(--card-bg); padding:2rem 2.5rem; border-radius:16px; max-width:500px; width:100%; box-shadow:0 6px 24px rgba(0,140,186,0.18);">
-                    <a href="how-i-started-coding.html" target="_blank" style="font-size:1.25rem; color:var(--text-color); font-weight:700; text-decoration:none; transition:color 0.2s; letter-spacing:0.5px; display:inline-block;">
+                <div class="smart-hover floating"
+                    style="background:var(--card-bg); padding:2rem 2.5rem; border-radius:16px; max-width:500px; width:100%; box-shadow:0 6px 24px rgba(0,140,186,0.18);">
+                    <a href="how-i-started-coding.html" target="_blank"
+                        style="font-size:1.25rem; color:var(--text-color); font-weight:700; text-decoration:none; transition:color 0.2s; letter-spacing:0.5px; display:inline-block;">
                         How I Started My Coding Journey at 16
                     </a>
                 </div>
-                <div class="smart-hover floating" style="background:var(--card-bg); padding:2rem 2.5rem; border-radius:16px; max-width:500px; width:100%; box-shadow:0 6px 24px rgba(0,140,186,0.18);">
-                    <a href="top-5-programming-languages-2025.html" target="_blank" style="font-size:1.25rem; color:var(--text-color); font-weight:700; text-decoration:none; transition:color 0.2s; letter-spacing:0.5px; display:inline-block;">
+                <div class="smart-hover floating"
+                    style="background:var(--card-bg); padding:2rem 2.5rem; border-radius:16px; max-width:500px; width:100%; box-shadow:0 6px 24px rgba(0,140,186,0.18);">
+                    <a href="top-5-programming-languages-2025.html" target="_blank"
+                        style="font-size:1.25rem; color:var(--text-color); font-weight:700; text-decoration:none; transition:color 0.2s; letter-spacing:0.5px; display:inline-block;">
                         Top 5 Programming Languages to Learn in 2025
                     </a>
                 </div>
             </div>
-            <a href="blog.html" target="_blank" class="btn primary smart-hover glow" style="margin-top:2.5rem;">Read More Blog</a>
+            <a href="blog.html" target="_blank" class="btn primary smart-hover glow" style="margin-top:2.5rem;">Read
+                More Blog</a>
         </div>
         <style>
             .blog-preview a:hover {
@@ -607,15 +718,19 @@
                         <p>Phone: +977-9766097728</p>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm" action="https://formsubmit.co/thakullaaayushman@gmail.com" method="POST">
+                <form class="contact-form" id="contactForm" action="https://formsubmit.co/thakullaaayushman@gmail.com"
+                    method="POST">
                     <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required aria-label="Your Name">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required
+                            aria-label="Your Name">
                     </div>
                     <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Your Email" required aria-label="Your Email">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required
+                            aria-label="Your Email">
                     </div>
                     <div class="form-group">
-                        <textarea id="message" name="message" placeholder="Your Message" required aria-label="Your Message" rows="5"></textarea>
+                        <textarea id="message" name="message" placeholder="Your Message" required
+                            aria-label="Your Message" rows="5"></textarea>
                     </div>
                     <input type="hidden" name="_next" value="index.html">
                     <button type="submit" class="btn primary smart-hover glow" aria-label="Send Message">
@@ -629,10 +744,14 @@
     <footer class="footer animated-bg">
         <div class="container">
             <div class="social-links">
-                <a href="https://youtube.com/@aayushmancoder1906?si=01GryT816LXw3eBR" target="_blank" title="YouTube" class="smart-hover floating"><i class="fab fa-youtube"></i></a>
-                <a href="https://github.com/aayushman1906" target="_blank" class="smart-hover floating"><i class="fab fa-github"></i></a>
-                <a href="https://www.facebook.com/aayushman.thakulla.2025" target="_blank" class="smart-hover floating"><i class="fab fa-facebook"></i></a>
-                <a href="https://www.instagram.com/aayushman1906/" target="_blank" class="smart-hover floating"><i class="fab fa-instagram"></i></a>
+                <a href="https://youtube.com/@aayushmancoder1906?si=01GryT816LXw3eBR" target="_blank" title="YouTube"
+                    class="smart-hover floating"><i class="fab fa-youtube"></i></a>
+                <a href="https://github.com/aayushman1906" target="_blank" class="smart-hover floating"><i
+                        class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/aayushman.thakulla.2025" target="_blank"
+                    class="smart-hover floating"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/aayushman1906/" target="_blank" class="smart-hover floating"><i
+                        class="fab fa-instagram"></i></a>
             </div>
             <p class="sparkle">&copy; 2025 Aayushman Thakulla. All rights reserved.</p>
         </div>
@@ -646,7 +765,7 @@
     <script src="script.js"></script>
     <script>
         // Smart Loading Animation - Simplified
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Hide loading animation immediately when DOM is ready
             const loadingAnimation = document.getElementById('loadingAnimation');
             if (loadingAnimation) {
@@ -669,7 +788,7 @@
         }, 1000);
 
         // Smart Scroll Progress Indicator
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', function () {
             const scrollTop = window.pageYOffset;
             const docHeight = document.body.offsetHeight - window.innerHeight;
             const scrollPercent = (scrollTop / docHeight) * 100;
@@ -733,13 +852,15 @@
             observer.observe(section);
         });
 
+        // Theme toggle is handled in script.js
+
         // Smart Typing Animation
         const typingText = document.querySelector('.typing-text');
         if (typingText) {
             const text = typingText.textContent;
             typingText.textContent = '';
             let i = 0;
-            
+
             function typeWriter() {
                 if (i < text.length) {
                     typingText.textContent += text.charAt(i);
@@ -747,10 +868,11 @@
                     setTimeout(typeWriter, 100);
                 }
             }
-            
+
             // Start typing animation after page load
             setTimeout(typeWriter, 1000);
         }
     </script>
 </body>
-</html> 
+
+</html>
