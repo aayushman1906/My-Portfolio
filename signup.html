@@ -287,21 +287,45 @@
                         });
                     })
                     .then(() => {
-                        alert("Account created successfully!");
+                        // Success writing to DB
+                        alert("Account created successfully! Please login.");
+                        return auth.signOut();
+                    })
+                    .then(() => {
                         window.location.href = "login.html";
                     })
                     .catch((error) => {
                         console.error(error);
                         var errorMessage = error.message;
 
-                        // If user was created but Firestore failed (likely permission error)
+                        // Check for common Firestore permission error or others
                         if (errorMessage.includes("permission-denied") || errorMessage.includes("Missing or insufficient permissions")) {
-                            alert("Account created, but could not save profile data. Please check Firestore security rules. You can still login.");
-                            window.location.href = "login.html";
+                            alert("Account created! (Profile data could not be saved due to permissions, but you can still login).");
                         } else {
+                            // Only alert real errors if it wasn't a DB success. 
+                            // However, if we are here, it means either createUser failed OR db.set failed.
+                            // We need to differentiate.
+                            // But usually if createUser succeeds, we want to redirect.
+
+                            // Let's assume if we are here and auth.currentUser exists, it was a DB error.
+                            if (auth.currentUser) {
+                                alert("Account created! Redirecting to login...");
+                                auth.signOut().then(() => {
+                                    window.location.href = "login.html";
+                                });
+                                return;
+                            }
+
                             alert("Error: " + errorMessage);
                             submitBtn.innerText = originalBtnText;
                             submitBtn.disabled = false;
+                        }
+
+                        // If we handled a DB error above (auth.currentUser exists), redirect
+                        if (auth.currentUser) {
+                            auth.signOut().then(() => {
+                                window.location.href = "login.html";
+                            });
                         }
                     });
             });

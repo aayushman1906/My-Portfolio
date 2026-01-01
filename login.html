@@ -213,11 +213,12 @@
     <script src="firebase-config.js"></script>
     <script>
         const loginBtn = document.querySelector('.login-btn');
-        const emailInput = document.querySelector('input[type="text"]'); // Changed selector as per file content
-        const passwordInput = document.querySelector('input[type="password"]');
-
-        // Fix selector for email input if strictly following "text" type or add ID in HTML
-        // Best to add IDs to inputs in login.html first or select by type carefully
+        const loginBtn = document.querySelector('.login-btn');
+        // Use more specific selectors or add IDs to inputs in HTML if possible, 
+        // but since we are editing JS only efficiently:
+        const inputs = document.querySelectorAll('.form-input');
+        const emailInput = inputs[0];
+        const passwordInput = inputs[1];
 
         loginBtn.addEventListener('click', function () {
             const email = emailInput.value;
