@@ -277,56 +277,47 @@
                     .then((userCredential) => {
                         // Signed in 
                         var user = userCredential.user;
+                        console.log("User created:", user.uid);
 
                         // Store additional user data in Firestore
+                        // We attach a catch here so if DB fails, the main chain continues
                         return db.collection("users").doc(user.uid).set({
                             fullname: fullname,
                             email: email,
                             signupDate: new Date().toISOString(),
                             role: 'user' // Default role
+                        }).catch(dbError => {
+                            console.error("Firestore Error (non-fatal):", dbError);
+                            // Verify if it's a permission error
+                            if (dbError.code === 'permission-denied') {
+                                console.log("Permission denied for writing user document. Proceeding anyway.");
+                            }
                         });
                     })
                     .then(() => {
-                        // Success writing to DB
+                        // Success writing to DB (or caught error)
+                        console.log("Signup flow complete. Redirecting.");
                         alert("Account created successfully! Please login.");
                         return auth.signOut();
                     })
                     .then(() => {
+                        console.log("Signed out. Navigating to login.html");
                         window.location.href = "login.html";
                     })
                     .catch((error) => {
-                        console.error(error);
+                        console.error("Signup Error:", error);
                         var errorMessage = error.message;
 
-                        // Check for common Firestore permission error or others
-                        if (errorMessage.includes("permission-denied") || errorMessage.includes("Missing or insufficient permissions")) {
-                            alert("Account created! (Profile data could not be saved due to permissions, but you can still login).");
-                        } else {
-                            // Only alert real errors if it wasn't a DB success. 
-                            // However, if we are here, it means either createUser failed OR db.set failed.
-                            // We need to differentiate.
-                            // But usually if createUser succeeds, we want to redirect.
+                        // If the error is regarding the initial user creation (e.g. email already in use)
+                        // Then we should show it and reset the button.
 
-                            // Let's assume if we are here and auth.currentUser exists, it was a DB error.
-                            if (auth.currentUser) {
-                                alert("Account created! Redirecting to login...");
-                                auth.signOut().then(() => {
-                                    window.location.href = "login.html";
-                                });
-                                return;
-                            }
+                        // However, check if user was actually created despite this error falling through? 
+                        // (Unlikely with the structure above, catch catches the first rejection).
 
-                            alert("Error: " + errorMessage);
-                            submitBtn.innerText = originalBtnText;
-                            submitBtn.disabled = false;
-                        }
+                        alert("Error: " + errorMessage);
 
-                        // If we handled a DB error above (auth.currentUser exists), redirect
-                        if (auth.currentUser) {
-                            auth.signOut().then(() => {
-                                window.location.href = "login.html";
-                            });
-                        }
+                        submitBtn.innerText = originalBtnText;
+                        submitBtn.disabled = false;
                     });
             });
         }
