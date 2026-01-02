@@ -207,6 +207,65 @@
             color: #999;
             font-size: 14px;
         }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            .login-card {
+                width: 100%;
+                max-width: 400px;
+                padding: 40px 25px;
+            }
+
+            .login-title {
+                font-size: 24px;
+                margin-bottom: 30px;
+            }
+
+            .form-label {
+                font-size: 14px;
+            }
+
+            .form-input {
+                padding: 12px 18px;
+                font-size: 14px;
+            }
+
+            .login-btn,
+            .google-btn {
+                height: 48px;
+                font-size: 15px;
+            }
+
+            .home-link {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 30px 20px;
+            }
+
+            .login-title {
+                font-size: 22px;
+            }
+
+            .form-input {
+                padding: 10px 15px;
+            }
+
+            .login-btn,
+            .google-btn {
+                height: 45px;
+                font-size: 14px;
+            }
+        }
     </style>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
