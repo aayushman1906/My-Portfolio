@@ -18,5 +18,8 @@ if (!firebase.apps.length) {
 const auth = firebase.auth();
 const db = firebase.firestore();
 
+// Fix for "Failed to get document because the client is offline" error
+db.settings({ experimentalForceLongPolling: true });
+
 // Optional: Analytics (requires firebase-analytics.js script to be loaded, ignoring for now to ensure Auth/DB works)
 // const analytics = firebase.analytics();

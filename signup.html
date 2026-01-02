@@ -377,8 +377,8 @@
                         const user = result.user;
                         console.log("Google Sign Up Success:", user.uid);
 
-                        // Check if user exists in Firestore
-                        return db.collection("users").doc(user.uid).get()
+                        // Try to check/create user in Firestore, but don't block login if it fails
+                        db.collection("users").doc(user.uid).get()
                             .then((doc) => {
                                 if (!doc.exists) {
                                     // Create user doc if not exists
@@ -391,8 +391,12 @@
                                     });
                                 }
                             })
-                            .then(() => {
-                                // Redirect to home (as they are now signed in)
+                            .catch((dbError) => {
+                                console.error("Firestore Error (non-blocking):", dbError);
+                                // Continue anyway - auth succeeded even if DB write failed
+                            })
+                            .finally(() => {
+                                // Redirect to home regardless of DB status
                                 window.location.href = "index.html";
                             });
                     })
