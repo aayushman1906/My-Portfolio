@@ -170,6 +170,43 @@
         }
 
         /* Font Awesome for Icons if needed (not in strict image but good for home icon) */
+
+        /* Google Btn */
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 15px;
+            background: #fff;
+            color: #555;
+            font-weight: 600;
+            border: none;
+            outline: none;
+            height: 50px;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 10px 10px 15px #cbced1, -10px -10px 15px white;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .google-btn img {
+            width: 20px;
+            margin-right: 10px;
+        }
+
+        .google-btn:hover {
+            box-shadow: 6px 6px 10px #cbced1, -6px -6px 10px white;
+            transform: scale(0.98);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            color: #999;
+            font-size: 14px;
+        }
     </style>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -198,6 +235,13 @@
             <button type="button" class="login-btn">
                 Login
             </button>
+
+            <div class="divider">OR</div>
+
+            <button type="button" class="google-btn" id="googleBtn">
+                <i class="fab fa-google" style="color: #DB4437; font-size: 18px; margin-right: 10px;"></i>
+                Sign in with Google
+            </button>
         </form>
 
         <a href="#" class="forgot-pass">Forgot password?</a>
@@ -207,9 +251,9 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <script src="firebase-config.js"></script>
     <script>
         const loginBtn = document.querySelector('.login-btn');
@@ -258,6 +302,43 @@
                     loginBtn.disabled = false;
                 });
         });
+
+        // Google Sign In
+        const googleBtn = document.getElementById('googleBtn');
+        if (googleBtn) {
+            googleBtn.addEventListener('click', () => {
+                const provider = new firebase.auth.GoogleAuthProvider();
+
+                auth.signInWithPopup(provider)
+                    .then((result) => {
+                        const user = result.user;
+                        console.log("Google Sign In Success:", user.uid);
+
+                        // Check if user exists in Firestore
+                        return db.collection("users").doc(user.uid).get()
+                            .then((doc) => {
+                                if (!doc.exists) {
+                                    // Create user doc if not exists
+                                    return db.collection("users").doc(user.uid).set({
+                                        fullname: user.displayName,
+                                        email: user.email,
+                                        signupDate: new Date().toISOString(),
+                                        role: 'user',
+                                        authMethod: 'google'
+                                    });
+                                }
+                            })
+                            .then(() => {
+                                // Redirect to home
+                                window.location.href = "index.html";
+                            });
+                    })
+                    .catch((error) => {
+                        console.error("Google Auth Error:", error);
+                        alert("Google Sign In Failed: " + error.message);
+                    });
+            });
+        }
     </script>
 </body>
 
